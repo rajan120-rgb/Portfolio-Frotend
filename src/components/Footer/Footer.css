@@ -1,0 +1,32 @@
+.footer{
+    width: 100vw;
+    height: 10vh;
+    background-color:  rgba(20, 20, 20, 0.5);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5rem;
+}
+.footer .footer-links{
+    display: flex;
+    gap: 2rem;
+}
+.footer-links li{
+    list-style: none;
+}
+.footer-links a{
+    text-decoration: none;
+}
+.footer-links .fa-brands{
+    color: rgb(109, 109, 246) ;
+    font-size: 1.5rem;
+}
+@media (max-width:600px){
+    .footer p{
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .footer .footer-links{
+        gap: 0.5rem;
+    }
+}

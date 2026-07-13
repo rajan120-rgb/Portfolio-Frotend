@@ -1,0 +1,187 @@
+.hero {
+  min-height: 92vh;
+  width: 100%;
+}
+.hero-left {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+.hero-intro p {
+  font-size: 1.5rem;
+  /* font-weight: 100; */
+  color: rgb(213, 197, 197);
+}
+.hero-main-profile {
+  flex: 1;
+}
+.hero-main-profile img {
+  object-fit: cover;
+  width: 450px;
+  flex: 1;
+  border-radius: 50%;
+  margin-left: 5rem;
+   box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+
+}
+.hero-intro {
+  flex: 1;
+  padding-top: 100px;
+}
+.hero-intro-hellow {
+  margin-bottom: 40px;
+}
+.hero-intro-hellow h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: 800;
+  width: 46vw;
+  height: 7rem;
+}
+.hero-intro-hellow span {
+  color: rgb(109, 109, 246);
+}
+.hero-intro .btn {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.hero-intro .btn button {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 10px;
+  border: none;
+  padding: 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease-in-out 0.1s;
+}
+.btn button.btn-transparent {
+  background-color: transparent;
+  border: 2px solid white;
+  color: rgb(109, 109, 246);
+}
+.btn span {
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  background-color: rgb(109, 109, 246);
+  z-index: -2;
+  transition: 0.3s;
+}
+.btn button:hover span{
+  width: 100%;
+  height: 100%;
+}
+/* .hero-intro .btn button:hover {
+  transform: scale(1.1);
+} */
+.hero-experience {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 40vw;
+  min-height: 18vh;
+  border-radius: 10px;
+}
+.hero-experience .five {
+  margin-top: -30px;
+}
+.hero-experience p {
+  font-size: 1.3rem;
+}
+.hero-experience .five span {
+  color: rgb(109, 109, 246);
+  font-size: 1.8rem;
+}
+.hero-experience hr {
+  height: 10vh;
+  width: 1.5px;
+  background-color: wheat;
+  /* border: none; */
+}
+@media (max-width: 1380px) {
+  .hero {
+    height: auto;
+  }
+  .hero-left {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-intro-hellow h1 {
+    font-size: 2rem;
+    height: 10vh;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-intro p {
+    font-size: 1.3rem;
+    width: 90vw;
+    margin: auto;
+    text-align: center;
+  }
+  .hero-main-profile img {
+    width: 250px;
+    /* margin-right: 5rem; */
+    margin: 0 auto;
+    display: block;
+  }
+  .btn {
+    justify-content: center;
+    text-align: center;
+  }
+  .btn button {
+    width: 150px;
+  }
+  .hero-experience {
+    max-width: 40%;
+    width: 100%;
+    min-height: auto;
+    padding: 40px;
+    gap: 40px;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .hero-experience p {
+    text-align: center;
+  }
+  .hero-experience hr {
+    width: 100%;
+    height: 1px;
+  }
+  .hero-experience .five {
+    margin-top: 0;
+  }
+}
+@media (max-width:800px){
+    .hero-intro {
+    width: 100%;
+    padding-top: 50px;
+  }
+  .hero-intro-hellow h1 {
+    font-size: 1.7rem;
+    height: 10vh;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+@media (max-width:400px){
+   .hero-intro {
+    width: 100%;
+    padding-top: 50px;
+  }
+}

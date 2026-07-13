@@ -1,0 +1,141 @@
+.navbar {
+  height: 15vh;
+  width: 100%;
+   background: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(10px);
+  /* -webkit-backdrop-filter: blur(10px); */
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+ 
+  /* overflow-x: hidden; */
+}
+.turn .fa-solid{
+  font-size: 1.5rem;
+}
+.navbar h1 {
+   color:  rgb(109, 109, 246);
+  font-size: 24px;
+  font-weight: 600;
+   /* animation: slide 0.3s ease forwards ; */
+}
+.navbar-list {
+  display: flex;
+  gap: 3rem;
+   /* animation: slideList 0.3s ease forwards; */
+}
+.navbar-list a {
+  text-decoration: none;
+  /* color:white; */
+  font-size: 20px;
+}
+.navbar-list a:hover{
+    color: rgb(109, 109, 246);
+}
+.login-page button{
+  padding: 5px 20px;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(109, 109, 246);
+  border-radius: 50px;
+  border: 0;
+}
+.login button{
+   padding: 3px 10px;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(109, 109, 246);
+  border-radius: 50px;
+  border: 0;
+}
+.navbar li {
+  list-style: none;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+ .nav-link.active{
+  color: rgb(109, 109, 246);
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid rgb(109, 109, 246);
+}
+.icon {
+  display: none;
+  /* position: relative; */
+  cursor: pointer;
+}
+.icon i{
+    font-size: 30px;
+}
+.navbar-list-menu {
+  position: absolute;
+  top: 6.2rem;
+  right: 0px;
+  background-color: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(10px);
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 150px;
+  z-index: 9999;
+  border-radius: 10px;
+}
+.navbar-list-menu a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+.navbar-list-menu li {
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  padding: 4px 0px;
+}
+.navbar-list-menu li:hover {
+  background-color:rgb(109, 109, 246);
+}
+@keyframes slide {
+  0%{
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(100px);
+    opacity: 1;
+  }
+}
+@keyframes slideList {
+  0%{
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+@media (max-width: 1120px) {
+  .login-page button{
+    display: none;
+  }
+  .navbar-list {
+    display: none;
+  }
+  .icon {
+    display: block;
+  }
+}
+@media (max-width:540px){
+    .navbar h1{
+        font-size: 17px;
+    }
+    .navbar-list-menu{
+      top: 7.4rem;
+      margin-right: 4px;
+    }
+}

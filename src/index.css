@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  color: #f8fafc;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+   font-family: "Inter", sans-serif;
+     /* animation: slideList 0.3s ease forwards ; */
+   /* overflow-x: hidden; */
+   /* box-sizing: border-box; */
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("./components/assets/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px);
+  transform: scale(1.05);
+  z-index: -2;
+}
+@keyframes slide {
+  0%{
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(100px);
+    opacity: 1;
+  }
+}
+@keyframes slideList {
+  0%{
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+}
