@@ -91,10 +91,10 @@ const Navbar = () => {
             </Link>
           </li>
         </div>
-        <div className="login-page">
+        {/* <div className="login-page">
           <RouterLink to='/login'>
           </RouterLink>
-        </div>
+        </div> */}
         {/* <div onClick={toggle}  className="turn"> */}
         {/* {isOn ? <FaSun /> : <FaMoon />} */}
         {/* <i class="fa-solid fa-eye"></i> */}
