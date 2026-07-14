@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Api } from "../../Api/Api";
 import "./Bottom.css";
 
 const Bottom = () => {
+  // useEffect (()=>{
+  //   Api()
+  // },[])
   return (
     <>
       <div className="bottom">

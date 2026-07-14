@@ -8,24 +8,9 @@ import Swal from "sweetalert2";
 import { Link ,  scrollSpy} from "react-scroll";
 //  import {  toast } from 'react-toastify';
 
-const Hero = () => {
+const Hero = ({hero}) => {
 
-
-//   const onclick =()=>{
-
-//     Swal.fire({
-//   title: "Do you want to save the changes?",
-//   showDenyButton: true,
-//   showCancelButton: true,
-//   confirmButtonText: "Save",
-//   denyButtonText: `Don't save`
-// }).then((result) => {
-//   /* Read more about isConfirmed, isDenied below */
-//   if (result.isConfirmed) Swal.fire("Saved!", "", "success");
-//   else if (result.isDenied) Swal.fire("Changes are not saved", "", "info");
-// });
-//     }
-
+console.log(hero.name)
   const onclick = () => {
   Swal.fire({
     title: "Download Resume?",
@@ -64,7 +49,7 @@ const Hero = () => {
 };
 
 
-
+// console.log(hero.profile_image);
  
 
   return (
@@ -72,18 +57,20 @@ const Hero = () => {
       <div className="hero">
         <div className="hero-left">
           <div className="hero-main-profile">
-            <img src={profile_image} alt="" />
+            <img src={hero.profile_image} alt="Profile" />
           </div>
           <div className="hero-intro">
             <div className="hero-intro-hellow">
               <h1>
-                Hey , I am Rajan {" "}
+                Hey , I am {hero.name} {" "}
                 <span>
-                  <Typewriter
+                {hero && hero.profession &&(
+                    <Typewriter
                   words={[
-                    "Frontend Developer",
-                    "React Developer",
-                    "UI Learning"
+                    hero.profession
+                    // "Frontend Developer",
+                    // "React Developer",
+                    // "UI Learning"
                   ]}
                   loop={true}
                   cursor
@@ -92,14 +79,16 @@ const Hero = () => {
                   deleteSpeed={50}
                   delaySpeed={1500}
                   />
+                )}
                 </span>
               </h1>
             </div>
             <p>
-              I am a Frontend Developer focused on transforming ideas into
+              {hero.description}
+              {/* I am a Frontend Developer focused on transforming ideas into
               interactive, responsive, and high-performance web experiences. I
               specialize in building clean UI designs, reusable components, and
-              seamless user experiences using modern web technologies.
+              seamless user experiences using modern web technologies. */}
             </p>
             <div className="btn">
                <Link to="contacts" spy={true}  offset={-150} smooth={true} duration={500}><button><span></span>Hire Me </button></Link>
