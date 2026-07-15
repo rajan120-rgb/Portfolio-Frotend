@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Skill.css";
+import { Api } from "../../../Api/Api";
 
 const Skill = () => {
-  const skills = [
-    { name: "HTML", level: 90 },
-    { name: "CSS", level: 85 },
-    { name: "JavaScript", level: 75 },
-    { name: "React", level: 70 },
-    { name: "UI Design", level: 75 },
-    { name: "Figma", level: 75 },
-  ];
+const [skill, setSkill] = useState([])
+
+
+    useEffect(() => {
+       const getSkill = async () => {
+         try {
+           const data = await Api("/admin/skills");
+   
+           console.log(data);
+   
+           if (data.success) {
+             setSkill(data.data);
+           }
+         } catch (error) {
+           console.log(error);
+         } 
+       };
+   
+       getSkill();
+     }, []);
+
+     skill.forEach((item) => console.log(item.icon));
+    //  console.log(sk)
+
+  // const skills = [
+  //   { name: "HTML", level: 90 },
+  //   { name: "CSS", level: 85 },
+  //   { name: "JavaScript", level: 75 },
+  //   { name: "React", level: 70 },
+  //   { name: "UI Design", level: 75 },
+  //   { name: "Figma", level: 75 },
+  // ];
 
   return (
     <>
@@ -23,23 +48,32 @@ const Skill = () => {
             projects while continuously improving my knowledge.
           </p>
         </div>
+
         <div className="skill-icon">
-          <i className="fa-brands fa-html5"></i>
+          {skill.map((icon, index)=>(
+             <i className={icon.icon} key={index}></i>
+          ))}
+        </div>
+        {/* <div className="skill-icon">
+          <i className={skill.icon}></i>
           <i className="fa-brands fa-css"></i>
           <i className="fa-brands fa-js"></i>
           <i className="fa-brands fa-react"></i>
-        </div>
+        </div> */}
         <div className="skill-level">
-          {skills.map((skill, index) => (
-            <div className="skill-level-content" key={index}>
+          {skill.map((skill, index) => (
+            
+             <div className="skill-level-content" key={index}>
              <div className="skill-side">
                <h3>{skill.name}</h3>
-              <div className="skill-level-percent">{skill.level}%</div>
+              <div className="skill-level-percent">{skill.percentage}%</div>
              </div>
               <div className="skill-level-percent-bar">
-                <div className="progress" style={{ width: `${skill.level}%` }}> <span className="thumb"></span></div>
+                <div className="progress" style={{ width: `${skill.percentage}%` }}> <span className="thumb"></span></div>
               </div>
             </div>
+            
+           
           ))}
         </div>
       </section>

@@ -2,9 +2,16 @@ import React from "react";
 import "./Login.css";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/Context.jsx";
+ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const {closeLogin} = useContext(LoginContext);
+      const navigate = useNavigate();
+
+      const handleClose = () => {
+     closeLogin()
+    navigate("/"); // Home route path
+  };
   return (
     <div className="login-signup">
 
@@ -12,8 +19,9 @@ const Login = () => {
 
         <button 
           className="close-btn"
-          onClick={closeLogin}
+          onClick={handleClose}
         >
+
           ✖
         </button>
 
