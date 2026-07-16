@@ -1,8 +1,10 @@
 import React from "react";
 import "./Login.css";
+import {Link as RouterLink } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/Context.jsx";
  import { useNavigate } from "react-router-dom";
+import Dashboard from "../Dashboard/Dashboard.jsx";
 
 const Login = () => {
     const {closeLogin} = useContext(LoginContext);
@@ -44,9 +46,12 @@ const Login = () => {
           />
         </div>
 
-        <button>
+ <RouterLink to='/dashboard'>
+  <button className="btn-continue">
           Continue
         </button>
+          </RouterLink>
+       
 
         <p className="loginsignup-login">
           Already have an account?

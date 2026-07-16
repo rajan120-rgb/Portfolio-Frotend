@@ -133,7 +133,7 @@
 }
 
 /* Continue button */
-.loginsignup-container > button:not(.close-btn) {
+.loginsignup-container .btn-continue {
   width: 100%;
 
   height: 55px;
@@ -157,7 +157,7 @@
   transition: 0.3s;
 }
 
-.loginsignup-container > button:not(.close-btn):hover {
+.loginsignup-container .btn-continue:hover {
   background-color: rgb(80, 80, 200);
 }
 
