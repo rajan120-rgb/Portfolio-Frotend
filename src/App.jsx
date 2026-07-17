@@ -13,6 +13,7 @@ import About from "./components/Dashboard/About/About.jsx";
 import Contact from "./components/Dashboard/Contact/Contact.jsx";
 import Service from "./components/Dashboard/Service/Service.jsx";
 import Resume from "./components/Dashboard/Resume/Resume.jsx";
+import ContentDash from "./components/Dashboard/ContentDash/ContentDash.jsx";
 
 const App = () => {
   const { showLogin ,loading } = useContext(LoginContext);
@@ -39,11 +40,12 @@ useEffect(() => {
          <Route path="/" element={<Home />} />
          {showLogin&& <Route path="/login" element={<Login />} />}
          <Route path="/dashboard" element={<Dashboard />} >
-         <Route index element={<hellow />} />
+         {/* <Route index element={<Hellow />} /> */}
           <Route path="about" element={<About/>} />
           <Route path="skill" element={<Service/>} />
           <Route path="resume" element={<Resume/>} />
           <Route path="contact" element={<Contact/>}/>
+          <Route path="contentDash" element={<ContentDash/>}/>
          </Route>
       </Routes>
     

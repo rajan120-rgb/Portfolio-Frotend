@@ -1,0 +1,97 @@
+.navbar-dashboard{
+    height: 10vh ; 
+    background-color:white ;
+    color: black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+   
+}
+.navbar-dashboard .logout{
+    padding: 12px 25px;
+    background-color: rgb(109, 109, 246);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+   gap: 1rem;
+   position: absolute;
+   right: 40px;
+box-shadow: 0 6px 15px rgba(109, 109, 246, 0.5);
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.navbar-dashboard .logout:hover{
+    background-color: rgb(83, 83, 213);
+}
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  
+}
+
+.popup {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  transform: scale(0.8);
+  animation: popupIn 0.3s ease forwards;
+  /* position: absolute;
+  right: 0;
+  top: 5rem; */
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #6d6df6;
+  color: white;
+}
+
+.no {
+  background: #ddd;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

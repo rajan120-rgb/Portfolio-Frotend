@@ -1,0 +1,87 @@
+.loader-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Main loader */
+
+.loader {
+  width: 90px;
+  height: 90px;
+  position: relative;
+}
+
+
+/* Animated rings */
+
+.circle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 4px solid transparent;
+}
+
+
+.c1 {
+  border-top-color: #ff004c;
+  animation: rotate 1s linear infinite;
+}
+
+
+.c2 {
+  inset: 10px;
+  border-right-color: #00eaff;
+  animation: rotateReverse 1.4s linear infinite;
+}
+
+
+.c3 {
+  inset: 22px;
+  border-bottom-color: #ffffff;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+
+
+@keyframes rotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+@keyframes rotateReverse {
+
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+
+}
+
+
+@keyframes pulse {
+
+  0%,100% {
+    transform: scale(.7);
+    opacity:.4;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity:1;
+  }
+
+}

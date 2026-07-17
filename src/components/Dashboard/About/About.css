@@ -1,0 +1,56 @@
+.about-dashboard {
+  color: black;
+  padding: 3rem 0 0 3rem;
+}
+.about-dashboard h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.about-dashboard .image-url {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+/* .about-dashboard .img{
+    margin-top: 2.5rem;
+    display: flex;
+   
+    gap: 3rem;
+} */
+.about-dashboard .image-link {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.about-dashboard input {
+  padding: 10px 5px;
+  width: 60vw;
+  border: 1px solid gray;
+  outline: 1px solid grey;
+}
+.about-dashboard input::placeholder {
+  font-size: 0.8rem;
+}
+.about-dashboard input:focus {
+  border-color: rgb(109, 109, 246);
+  box-shadow: 0 0 10px rgba(109, 109, 246, 0.6);
+}
+.image-link label {
+  font-size: 1.2rem;
+}
+.about-form-dashboard button {
+  padding: 12px 25px;
+  background-color: rgb(109, 109, 246);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 6px 15px rgba(109, 109, 246, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 10rem;
+}

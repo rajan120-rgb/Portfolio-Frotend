@@ -3,19 +3,18 @@ import "./Dashboard.css";
 import Sidebar from './Sidebar/Sidebar'
 import Main from './Main/Main'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Layout from './Layout/Layout';
-import About from './About/About.jsx';
-import Contact from './Contact/Contact.jsx';
-import Service from './Service/Service.jsx';
-import Resume from './Resume/Resume.jsx';
+
+
 
 
 const Dashboard = () => {
   return (
     <>
-    <div className='dashboard'>
-      <Sidebar/>
+    <div className='dash'>
+    <div className="dashboard">
+        <Sidebar/>
       <Main/>
+    </div>
     </div>
     </>
   )
