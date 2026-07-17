@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import './Home.css'
+
 import Navbar from "../Navbar/Navbar.jsx";
 import About from "../Pages/About/About.jsx";
 import Skill from "../Pages/Skills/Skill.jsx";
@@ -36,7 +38,13 @@ const Home = () => {
   return (
     <div>
    {loading? (
-    <h1>Loading...</h1>
+     <div className="loader-wrapper">
+      <div className="loader">
+        <div className="circle c1"></div>
+        <div className="circle c2"></div>
+        <div className="circle c3"></div>
+      </div>
+    </div>
    ):(
       <>
        <Navbar/>
