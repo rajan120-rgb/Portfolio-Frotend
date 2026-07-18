@@ -6,7 +6,7 @@ const Navbar = () => {
    const navigate = useNavigate();
    const [popup , setPopup] = useState(false);
   const logout = () =>{
-     navigate("/login")
+     navigate("/login");
   }
   return (
     <>

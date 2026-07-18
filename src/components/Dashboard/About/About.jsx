@@ -1,17 +1,22 @@
 import React, { useRef, useState } from "react";
 import "./About.css";
 import { useSearchParams } from "react-router-dom";
+import { Api } from "../../../Api/Api";
 
 const About = () => {
   const [formData, setFormData] = useState({
     name: "",
     profession: "",
-    skill: "",
+    service: "",
     description: "",
   });
 
-  const [image, setImage] = useState(null);
-  const fileRef = useRef();
+  const [image, setImage] = useState({
+    image: null,
+    cv: null,
+  });
+  const imgRef = useRef();
+  const cvRef = useRef();
 
   const handleChange = (e) => {
     setFormData({
@@ -21,7 +26,10 @@ const About = () => {
   };
 
   const handleImage = (e) => {
-    setImage(e.target.files[0]);
+    setImage({
+      ...image,
+      [e.target.name]: e.target.files[0],
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -33,7 +41,8 @@ const About = () => {
     data.append("profession", formData.profession);
     data.append("description", formData.description);
     data.append("skill", formData.skill);
-    data.append("image", image);
+    data.append("image", image.image);
+    data.append("cv", image.cv);
 
     console.log(formData);
     console.log(image);
@@ -44,10 +53,15 @@ const About = () => {
         body: data,
       });
 
-      const result = await response.json();
-      console.log(result)
+      if (!response.ok) {
+        const text = await response.text();
+        console.log(text);
+        return;
+      }
 
+      const result = await response.json();
       console.log(result);
+
       alert("Saved Successfully");
       setFormData({
         name: "",
@@ -55,9 +69,16 @@ const About = () => {
         skill: "",
         description: "",
       });
-      setImage(null);
-      if (fileRef.current) {
-        fileRef.current.value = "";
+      setImage({
+        image: null,
+        cv: null,
+      });
+      // setImage(null);
+      if (imgRef.current) {
+        imgRef.current.value = "";
+      }
+      if (cvRef.current) {
+        cvRef.current.value = "";
       }
     } catch (error) {
       console.log(error);
@@ -71,19 +92,30 @@ const About = () => {
         <div className="about-form-dashboard">
           <form onSubmit={handleSubmit} action="">
             <div className="image-url">
-              <div className="img">
-                <div className="image-link">
-                  <label htmlFor="">Image</label>
-                  <input
-                    type="file"
-                    ref={fileRef}
-                    name="image"
-                    // value={formData.image}
-                    placeholder="Enter Your Url "
-                    onChange={handleImage}
-                    accept="image/*"
-                  />
-                </div>
+              <div className="image-link">
+                <label htmlFor="">Image</label>
+                <input
+                  type="file"
+                  ref={imgRef}
+                  name="image"
+                  // value={formData.image}
+                  placeholder="Enter Your Url "
+                  onChange={handleImage}
+                  accept="image/*"
+                />
+              </div>
+
+              <div className="image-link">
+                <label htmlFor="">CV</label>
+                <input
+                  type="file"
+                  name="cv"
+                  ref={cvRef}
+                  accept="application/pdf"
+                  // value={formData.name}
+                  placeholder="Upload Your CV "
+                  onChange={handleImage}
+                />
               </div>
               <div className="image-link">
                 <label htmlFor="">Name</label>
@@ -106,11 +138,11 @@ const About = () => {
                 />
               </div>
               <div className="image-link">
-                <label htmlFor="">Skill</label>
+                <label htmlFor="">Service</label>
                 <input
                   type="text"
-                  name="skill"
-                  value={formData.skill}
+                  name="service"
+                  value={formData.service}
                   placeholder="Enter Your Skill "
                   onChange={handleChange}
                 />

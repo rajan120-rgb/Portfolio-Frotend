@@ -8,12 +8,12 @@ const Sidebar = () => {
   return (
     <>
       <div className={`sidebar ${open ? "open" : "closed"}`}>
-        <div className="top-bar">
-          {open && (
+        <div className={`top-bar ${open?"":"closed-bar"}`}>
+          {/* {open && ( */}
             <RouterLink to="/dashboard/contentDash">
             <h2>Portfolio  <br /><span>Admin</span></h2>
             </RouterLink>
-          )}
+          {/* // )} */}
           <i className="fa-solid fa-bars" onClick={()=>setOpen(!open)}></i>
         </div>
        
