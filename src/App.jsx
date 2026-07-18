@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Login from "./components/Login/Login.jsx";
 import Home from "./components/Home/Home.jsx";
 import { useContext } from "react";
@@ -11,7 +11,7 @@ import { Api } from "./Api/Api.js";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import About from "./components/Dashboard/About/About.jsx";
 import Contact from "./components/Dashboard/Contact/Contact.jsx";
-import Service from "./components/Dashboard/Service/Service.jsx";
+import Skill from "./components/Dashboard/Skill/Service.jsx";
 import Resume from "./components/Dashboard/Resume/Resume.jsx";
 import ContentDash from "./components/Dashboard/ContentDash/ContentDash.jsx";
 
@@ -40,9 +40,9 @@ useEffect(() => {
          <Route path="/" element={<Home />} />
          {showLogin&& <Route path="/login" element={<Login />} />}
          <Route path="/dashboard" element={<Dashboard />} >
-         {/* <Route index element={<Hellow />} /> */}
+         <Route index element={<Navigate to="contentDash" replace/>} />
           <Route path="about" element={<About/>} />
-          <Route path="skill" element={<Service/>} />
+          <Route path="skill" element={<Skill/>} />
           <Route path="resume" element={<Resume/>} />
           <Route path="contact" element={<Contact/>}/>
           <Route path="contentDash" element={<ContentDash/>}/>

@@ -30,10 +30,10 @@ const Login = () => {
         <h1>Sign Up</h1>
 
         <div className="loginsignup-field">
-          <input 
+          {/* <input 
             type="text" 
             placeholder="Your Name"
-          />
+          /> */}
 
           <input 
             type="email" 
