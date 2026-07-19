@@ -55,11 +55,11 @@ const About = () => {
     Accept: "application/json",
   },
         body: data,
-        //  redirect: "manual",
+         redirect: "manual",
       });
-//       console.log(response.status);
-// console.log(response.type);
-// console.log(response.headers.get("location"));
+      console.log(response.status);
+console.log(response.type);
+console.log(response.headers.get("location"));
 
       // if (!response.ok) {
       //   const text = await response.text();
