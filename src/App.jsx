@@ -1,8 +1,9 @@
 import React from "react";
+import { useState, useEffect } from "react";
+ import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useState, useEffect, } from "react";
-
-import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login/Login.jsx";
 import Home from "./components/Home/Home.jsx";
 import { useContext } from "react";
@@ -16,44 +17,53 @@ import Resume from "./components/Dashboard/Resume/Resume.jsx";
 import ContentDash from "./components/Dashboard/ContentDash/ContentDash.jsx";
 
 const App = () => {
-  const { showLogin ,loading } = useContext(LoginContext);
+  const { showLogin, loading } = useContext(LoginContext);
 
-const navbarHeight = 210;
+  const navbarHeight = 210;
 
-useEffect(() => {
-  const aboutSection = document.getElementById("about");
+  useEffect(() => {
+    const aboutSection = document.getElementById("about");
 
-  if (aboutSection) {
-    window.scrollTo({
-      top: aboutSection.offsetTop - navbarHeight,
-      behavior: "smooth",
-    });
-  }
-}, []);
-  
+    if (aboutSection) {
+      window.scrollTo({
+        top: aboutSection.offsetTop - navbarHeight,
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   return (
-   
-      <>
+    <>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <BrowserRouter>
-     <Routes>
-         <Route path="/" element={<Home />} />
-         {showLogin&& <Route path="/login" element={<Login />} />}
-         <Route path="/dashboard" element={<Dashboard />} >
-         <Route index element={<Navigate to="contentDash" replace/>} />
-          <Route path="about" element={<About/>} />
-          <Route path="skill" element={<Skill/>} />
-          <Route path="resume" element={<Resume/>} />
-          <Route path="contact" element={<Contact/>}/>
-          <Route path="contentDash" element={<ContentDash/>}/>
-         </Route>
-      </Routes>
-    
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {showLogin && <Route path="/login" element={<Login />} />}
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route index element={<Navigate to="contentDash" replace />} />
+            <Route path="about" element={<About />} />
+            <Route path="skill" element={<Skill />} />
+            <Route path="resume" element={<Resume />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="contentDash" element={<ContentDash />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
-        {/* <Home />
+      {/* <Home />
         {showLogin && <Login />} */}
-      </>
-    
+    </>
   );
 };
 

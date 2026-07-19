@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
   transition: width 0.5s ease;
+
   
 
   /* height: 100vh;
@@ -25,7 +27,8 @@
   align-items: center;
 }
 .sidebar .closed-bar h2 {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
+  /* display: none; */
 }
 .sidebar .closed-bar h2 span {
   font-size: 0.5rem;
