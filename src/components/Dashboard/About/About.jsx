@@ -7,13 +7,13 @@ const About = () => {
   const [formData, setFormData] = useState({
     name: "",
     profession: "",
-    service: "",
     description: "",
+    service: "",
   });
 
   const [image, setImage] = useState({
-    image: null,
-    cv: null,
+    profile_image: null,
+    resume: null,
   });
   const imgRef = useRef();
   const cvRef = useRef();
@@ -40,24 +40,33 @@ const About = () => {
     data.append("name", formData.name);
     data.append("profession", formData.profession);
     data.append("description", formData.description);
-    data.append("skill", formData.skill);
-    data.append("image", image.image);
-    data.append("cv", image.cv);
+    data.append("service", formData.service);
+    data.append("profile_image", image.profile_image);
+    data.append("resume", image.resume);
 
     console.log(formData);
     console.log(image);
 
     try {
+      //  const token = "3|RFOfDBr4wqocOoT4G3dvOG4mBknG4saxtC55xykA180d6006"
       const response = await fetch("http://localhost:8000/api/admin/about", {
         method: "POST",
+         headers: {
+    Accept: "application/json",
+  },
         body: data,
+         redirect: "manual",
       });
+      console.log(response.status);
+console.log(response.type);
+console.log(response.headers.get("location"));
 
-      if (!response.ok) {
-        const text = await response.text();
-        console.log(text);
-        return;
-      }
+      // if (!response.ok) {
+      //   const text = await response.text();
+      //   console.log(text);
+      //   return;
+      // }
+      //  console.log("Status:", response.status);
 
       const result = await response.json();
       console.log(result);
@@ -70,10 +79,9 @@ const About = () => {
         description: "",
       });
       setImage({
-        image: null,
-        cv: null,
+        profile_image: null,
+        resume: null,
       });
-      // setImage(null);
       if (imgRef.current) {
         imgRef.current.value = "";
       }
@@ -97,7 +105,7 @@ const About = () => {
                 <input
                   type="file"
                   ref={imgRef}
-                  name="image"
+                  name="profile_image"
                   // value={formData.image}
                   placeholder="Enter Your Url "
                   onChange={handleImage}
@@ -109,7 +117,7 @@ const About = () => {
                 <label htmlFor="">CV</label>
                 <input
                   type="file"
-                  name="cv"
+                  name="resume"
                   ref={cvRef}
                   accept="application/pdf"
                   // value={formData.name}
@@ -122,7 +130,7 @@ const About = () => {
                 <input
                   type="text"
                   name="name"
-                  value={formData.name}
+                  value={formData.name || ""}
                   placeholder="Enter Your Name "
                   onChange={handleChange}
                 />
@@ -132,7 +140,7 @@ const About = () => {
                 <input
                   type="text"
                   name="profession"
-                  value={formData.profession}
+                  value={formData.profession || ""}
                   placeholder="Enter Your Profession "
                   onChange={handleChange}
                 />
@@ -142,7 +150,7 @@ const About = () => {
                 <input
                   type="text"
                   name="service"
-                  value={formData.service}
+                  value={formData.service || ""}
                   placeholder="Enter Your Skill "
                   onChange={handleChange}
                 />
@@ -152,7 +160,7 @@ const About = () => {
                 <input
                   type="text"
                   name="description"
-                  value={formData.description}
+                  value={formData.description || ""}
                   placeholder="Enter Your Description "
                   onChange={handleChange}
                 />

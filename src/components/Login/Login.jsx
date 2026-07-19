@@ -1,29 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
-import {Link as RouterLink } from "react-router-dom";
+import { toast, Bounce } from "react-toastify";
+import { Link as RouterLink } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/Context.jsx";
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard.jsx";
 
 const Login = () => {
-    const {closeLogin} = useContext(LoginContext);
-      const navigate = useNavigate();
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
+  const { closeLogin } = useContext(LoginContext);
+  const navigate = useNavigate();
 
-      const handleClose = () => {
-     closeLogin()
-    navigate("/"); // Home route path
+  const handleClose = () => {
+    closeLogin();
+    navigate("/");
+  };
+
+  const handleChange = (e) => {
+    setLoginForm({
+      ...loginForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const logIn = () => {
+    toast.success("Log in Successfully!", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    console.log(loginForm);
+    navigate("/dashboard");
   };
   return (
     <div className="login-signup">
-
       <div className="loginsignup-container">
-
-        <button 
-          className="close-btn"
-          onClick={handleClose}
-        >
-
+        <button className="close-btn" onClick={handleClose}>
           ✖
         </button>
 
@@ -35,23 +57,26 @@ const Login = () => {
             placeholder="Your Name"
           /> */}
 
-          <input 
-            type="email" 
+          <input
+            type="email"
             placeholder="Email Address"
+            name="email"
+            value={loginForm.email}
+            onChange={handleChange}
           />
 
-          <input 
-            type="password" 
+          <input
+            type="password"
             placeholder="Password"
+            name="password"
+            value={loginForm.password}
+            onChange={handleChange}
           />
         </div>
 
- <RouterLink to='/dashboard'>
-  <button className="btn-continue">
+        <button className="btn-continue" onClick={logIn}>
           Continue
         </button>
-          </RouterLink>
-       
 
         <p className="loginsignup-login">
           Already have an account?
@@ -61,13 +86,9 @@ const Login = () => {
         <div className="loginsignup-agree">
           <input type="checkbox" />
 
-          <p>
-            By continuing, I agree to the terms of use and privacy policy.
-          </p>
+          <p>By continuing, I agree to the terms of use and privacy policy.</p>
         </div>
-
       </div>
-
     </div>
   );
 };

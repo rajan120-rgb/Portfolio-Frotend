@@ -19,7 +19,6 @@ const Home = () => {
        const getAbout = async () => {
          try {
            const data = await Api("/admin/about");
-   
            console.log(data);
    
            if (data.success) {
