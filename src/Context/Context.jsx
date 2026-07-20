@@ -6,6 +6,7 @@ export const LoginContext = createContext();
 export const LoginProvider = ({children}) => {
     const [showLogin, setShowLogin] = useState(true);
      const [loading, setLoading] = useState(true);
+     const [token , setToken] = useState("")
     
 
     const openLogin = ()=> {
@@ -22,6 +23,8 @@ export const LoginProvider = ({children}) => {
         closeLogin,
         loading,
         setLoading,
+        setToken,
+        token,
        
     }
 

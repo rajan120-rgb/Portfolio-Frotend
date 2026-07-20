@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./About.css";
 import { useSearchParams } from "react-router-dom";
 import { Api } from "../../../Api/Api";
+import { LoginContext } from "../../../Context/Context";
 
 const About = () => {
+  const { token } = useContext(LoginContext)
   const [formData, setFormData] = useState({
     name: "",
     profession: "",
@@ -34,7 +36,7 @@ const About = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+console.log(token)
     const data = new FormData();
 
     data.append("name", formData.name);
@@ -48,18 +50,20 @@ const About = () => {
     console.log(image);
 
     try {
-      //  const token = "3|RFOfDBr4wqocOoT4G3dvOG4mBknG4saxtC55xykA180d6006"
+     
       const response = await fetch("http://localhost:8000/api/admin/about", {
         method: "POST",
-         headers: {
-    Accept: "application/json",
-  },
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: data,
-         redirect: "manual",
+        //  redirect: "manual",
       });
-      console.log(response.status);
-console.log(response.type);
-console.log(response.headers.get("location"));
+
+      //       console.log(response.status);
+      // console.log(response.type);
+      // console.log(response.headers.get("location"));
 
       // if (!response.ok) {
       //   const text = await response.text();
@@ -71,7 +75,6 @@ console.log(response.headers.get("location"));
       const result = await response.json();
       console.log(result);
 
-      alert("Saved Successfully");
       setFormData({
         name: "",
         profession: "",

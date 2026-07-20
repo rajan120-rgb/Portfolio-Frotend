@@ -46,6 +46,7 @@ const App = () => {
         pauseOnHover
         theme="light"
         transition={Bounce}
+         style={{ zIndex: 999999 }}
       />
       <BrowserRouter>
         <Routes>

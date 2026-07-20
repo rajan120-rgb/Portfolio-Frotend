@@ -12,7 +12,8 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { closeLogin } = useContext(LoginContext);
+  // const [error, setError] = useState("");
+  const { closeLogin , setToken , token} = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -27,20 +28,40 @@ const Login = () => {
     });
   };
 
-  const logIn = () => {
-    toast.success("Log in Successfully!", {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
-    console.log(loginForm);
-    navigate("/dashboard");
+  const logIn = async (e) => {
+    e.preventDefault();
+
+    if (!loginForm.email.trim()) {
+      toast.error("Email is required");
+      return;
+    }
+
+    if (!loginForm.password.trim()) {
+      toast.error("Password is required");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/login", {
+        method: "Post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginForm),
+      });
+      const data = await response.json();
+  
+      if (response.ok) {
+        setToken(data.token);
+        navigate("/dashboard");
+        toast.success("Log in Successfully!")
+      } else {
+        // setError(data.message);
+        toast.error("Invalid Crendential")
+      }
+    } catch (error) {
+      console.log("Server Error");
+    }
   };
   return (
     <div className="login-signup">
@@ -51,7 +72,7 @@ const Login = () => {
 
         <h1>Sign Up</h1>
 
-        <div className="loginsignup-field">
+        <form className="loginsignup-field">
           {/* <input 
             type="text" 
             placeholder="Your Name"
@@ -61,6 +82,7 @@ const Login = () => {
             type="email"
             placeholder="Email Address"
             name="email"
+            required
             value={loginForm.email}
             onChange={handleChange}
           />
@@ -69,14 +91,15 @@ const Login = () => {
             type="password"
             placeholder="Password"
             name="password"
+            required
             value={loginForm.password}
             onChange={handleChange}
           />
-        </div>
 
-        <button className="btn-continue" onClick={logIn}>
-          Continue
-        </button>
+          <button className="btn-continue" onClick={logIn}>
+            Continue
+          </button>
+        </form>
 
         <p className="loginsignup-login">
           Already have an account?

@@ -7,19 +7,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [popup, setPopup] = useState(false);
   const logout = () => {
-    toast.error("Logout Successfully!", {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    toast.error("Logout Successfully!");
     setTimeout(()=>{
        navigate("/login");
+       localStorage.removeItem("token", )
     },500)
   };
   return (
