@@ -33,8 +33,28 @@
 .skill-form-input label {
   font-size: 1.2rem;
 }
-.skill-form button {
+form .btn{
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+form .btn button{
   padding: 12px 25px;
+  background-color: rgb(109, 109, 246);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 6px 15px rgba(109, 109, 246, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 10rem;
+}
+.skill-form button{
+ padding: 12px 25px;
   background-color: rgb(109, 109, 246);
   border: none;
   border-radius: 10px;

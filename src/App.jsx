@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
- import { ToastContainer, Bounce } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -15,9 +15,11 @@ import Contact from "./components/Dashboard/Contact/Contact.jsx";
 import Skill from "./components/Dashboard/Skill/Service.jsx";
 import Resume from "./components/Dashboard/Resume/Resume.jsx";
 import ContentDash from "./components/Dashboard/ContentDash/ContentDash.jsx";
+import ProtectedRoute from "./components/Dashboard/ProtectedRoute/ProtectedRoute.jsx";
+import PublicRoute from "./components/Dashboard/ProtectedRoute/PublicRoute.jsx";
 
 const App = () => {
-  const { showLogin, loading } = useContext(LoginContext);
+  const { showLogin, loading, token } = useContext(LoginContext);
 
   const navbarHeight = 210;
 
@@ -46,19 +48,30 @@ const App = () => {
         pauseOnHover
         theme="light"
         transition={Bounce}
-         style={{ zIndex: 999999 }}
+        style={{ zIndex: 999999 }}
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          {showLogin && <Route path="/login" element={<Login />} />}
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<Navigate to="contentDash" replace />} />
-            <Route path="about" element={<About />} />
-            <Route path="skill" element={<Skill />} />
-            <Route path="resume" element={<Resume />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="contentDash" element={<ContentDash />} />
+          <Route path="/" element={
+            // <PublicRoute>
+              <Home/>
+            // </PublicRoute>
+          } />
+           <Route path="/login" element={
+            <PublicRoute>
+              
+              <Login />
+            </PublicRoute>
+          } />
+          <Route element={<ProtectedRoute/>}>
+             <Route path="/dashboard" element={<Dashboard />}>
+              <Route index element={<Navigate to="contentDash" replace />} />
+              <Route path="about" element={<About />} />
+              <Route path="skill" element={<Skill />} />
+              <Route path="resume" element={<Resume />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="contentDash" element={<ContentDash />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

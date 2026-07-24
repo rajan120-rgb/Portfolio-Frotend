@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { toast, Bounce } from "react-toastify";
 import { Link as RouterLink } from "react-router-dom";
@@ -13,7 +13,7 @@ const Login = () => {
     password: "",
   });
   // const [error, setError] = useState("");
-  const { closeLogin , setToken , token} = useContext(LoginContext);
+  const { closeLogin, setToken, token } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -50,19 +50,25 @@ const Login = () => {
         body: JSON.stringify(loginForm),
       });
       const data = await response.json();
-  
+      console.log("Login response:", data);
+
       if (response.ok) {
         setToken(data.token);
+
+        localStorage.setItem("token", data.token);
+
         navigate("/dashboard");
-        toast.success("Log in Successfully!")
+        toast.success("Log in Successfully!");
       } else {
         // setError(data.message);
-        toast.error("Invalid Crendential")
+        toast.error("Invalid Crendential");
       }
     } catch (error) {
       console.log("Server Error");
     }
   };
+
+
   return (
     <div className="login-signup">
       <div className="loginsignup-container">

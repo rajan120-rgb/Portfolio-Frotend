@@ -1,0 +1,30 @@
+.pop-up {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+.pop-msg{
+   background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  transform: scale(0.8);
+  animation: popupIn 0.3s ease forwards;
+}
+.popup-btn{
+   display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.popup-btn button{
+    padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
