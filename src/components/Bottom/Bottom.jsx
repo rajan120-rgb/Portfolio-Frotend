@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Api } from "../../Api/Api";
 import "./Bottom.css";
 
-const Bottom = () => {
-  // useEffect (()=>{
-  //   Api()
-  // },[])
+const Bottom = ({bottom}) => {
+//  const [bottom, setBottom] = useState("")
+useEffect(()=>{
+   console.log(bottom);
+})
   return (
     <>
       <div className="bottom">

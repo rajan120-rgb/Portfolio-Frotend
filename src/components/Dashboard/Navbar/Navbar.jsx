@@ -1,26 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./NavbarDash.css";
 import { Navigate, useNavigate } from "react-router-dom";
-import { toast ,Bounce } from "react-toastify";
+import { toast, Bounce } from "react-toastify";
+import { LoginContext } from "../../../Context/Context";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [popup, setPopup] = useState(false);
+  const { setToken } = useContext(LoginContext)
   const logout = () => {
-    toast.error("Logout Successfully!", {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
-    setTimeout(()=>{
-       navigate("/login");
-    },500)
+    toast.error("Logout Successfully!");
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/login");
   };
   return (
     <>

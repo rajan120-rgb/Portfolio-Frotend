@@ -1,14 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./About.css";
 import { useSearchParams } from "react-router-dom";
 import { Api } from "../../../Api/Api";
+import { LoginContext } from "../../../Context/Context";
+import Pop from "../PopUp/Pop";
 
 const About = () => {
+  const { token , setPopUp} = useContext(LoginContext);
+
   const [formData, setFormData] = useState({
     name: "",
     profession: "",
     description: "",
     service: "",
+    design:""
   });
 
   const [image, setImage] = useState({
@@ -32,50 +37,42 @@ const About = () => {
     });
   };
 
+  const save = () => {
+    setPopUp(true);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+      setPopUp(false);
     const data = new FormData();
-
     data.append("name", formData.name);
     data.append("profession", formData.profession);
     data.append("description", formData.description);
     data.append("service", formData.service);
+    data.append("design", formData.design);
     data.append("profile_image", image.profile_image);
     data.append("resume", image.resume);
-
     console.log(formData);
     console.log(image);
 
     try {
-      //  const token = "3|RFOfDBr4wqocOoT4G3dvOG4mBknG4saxtC55xykA180d6006"
       const response = await fetch("http://localhost:8000/api/admin/about", {
         method: "POST",
-         headers: {
-    Accept: "application/json",
-  },
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: data,
-         redirect: "manual",
       });
-      console.log(response.status);
-console.log(response.type);
-console.log(response.headers.get("location"));
-
-      // if (!response.ok) {
-      //   const text = await response.text();
-      //   console.log(text);
-      //   return;
-      // }
-      //  console.log("Status:", response.status);
 
       const result = await response.json();
       console.log(result);
 
-      alert("Saved Successfully");
       setFormData({
         name: "",
         profession: "",
-        skill: "",
+        service: "",
+        design:"",
         description: "",
       });
       setImage({
@@ -98,7 +95,7 @@ console.log(response.headers.get("location"));
       <div className="about-dashboard">
         <h1>About</h1>
         <div className="about-form-dashboard">
-          <form onSubmit={handleSubmit} action="">
+          <form action="">
             <div className="image-url">
               <div className="image-link">
                 <label htmlFor="">Image</label>
@@ -151,7 +148,17 @@ console.log(response.headers.get("location"));
                   type="text"
                   name="service"
                   value={formData.service || ""}
-                  placeholder="Enter Your Skill "
+                  placeholder="Enter Your Service "
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="image-link">
+                <label htmlFor="">Design</label>
+                <input
+                  type="text"
+                  name="design"
+                  value={formData.design || ""}
+                  placeholder="Enter Your Service Design "
                   onChange={handleChange}
                 />
               </div>
@@ -165,10 +172,13 @@ console.log(response.headers.get("location"));
                   onChange={handleChange}
                 />
               </div>
-              <button>Save Changes</button>
+              <button type="button" onClick={() => save()}>
+                Save Changes
+              </button>
             </div>
           </form>
         </div>
+        <Pop handleSubmit={handleSubmit} />
       </div>
     </>
   );
@@ -176,38 +186,3 @@ console.log(response.headers.get("location"));
 
 export default About;
 
-// import { useState } from "react";
-
-// function ImageUpload() {
-//   const [imageUrl, setImageUrl] = useState("");
-
-//   const handleImage = async (e) => {
-//     const file = e.target.files[0];
-
-//     const formData = new FormData();
-//     formData.append("image", file);
-
-//     const response = await fetch("http://localhost:5000/upload", {
-//       method: "POST",
-//       body: formData,
-//     });
-
-//     const data = await response.json();
-
-//     setImageUrl(data.url);
-//   };
-
-//   return (
-//     <div>
-//       <input type="file" onChange={handleImage} />
-
-//       <input
-//         type="text"
-//         value={imageUrl}
-//         readOnly
-//       />
-//     </div>
-//   );
-// }
-
-// export default ImageUpload;

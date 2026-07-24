@@ -4,8 +4,12 @@ import { createContext, useState } from "react";
 export const LoginContext = createContext();
 
 export const LoginProvider = ({children}) => {
+    const [popUp , setPopUp] = useState(false)
     const [showLogin, setShowLogin] = useState(true);
      const [loading, setLoading] = useState(true);
+     const [token , setToken] = useState(
+         localStorage.getItem("token") || ""
+     )
     
 
     const openLogin = ()=> {
@@ -22,6 +26,10 @@ export const LoginProvider = ({children}) => {
         closeLogin,
         loading,
         setLoading,
+        setToken,
+        token,
+        popUp,
+        setPopUp,
        
     }
 

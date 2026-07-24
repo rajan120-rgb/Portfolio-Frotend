@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Skill.css";
 import { Api } from "../../../Api/Api";
+import { LoginContext } from "../../../Context/Context";
 
 const Skill = () => {
+  const { token } = useContext(LoginContext)
 const [skill, setSkill] = useState([])
 
 
     useEffect(() => {
        const getSkill = async () => {
          try {
-           const data = await Api("/admin/skills");
+           const data = await Api("/public/skills");
    
            console.log(data);
    

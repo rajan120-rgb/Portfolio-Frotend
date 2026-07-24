@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Resume.css";
+import Pop from "../PopUp/Pop";
+import { LoginContext } from "../../../Context/Context";
 
 const Resume = () => {
+  const { setPopUp, token } = useContext(LoginContext);
   const [resumeForm, setResumeForm] = useState({
     institution: "",
     year: "",
@@ -9,6 +12,7 @@ const Resume = () => {
     faculty: "",
     gpa: "",
   });
+  const [resumes, setResumes] = useState([]);
 
   const handleChange = (e) => {
     setResumeForm({
@@ -16,8 +20,38 @@ const Resume = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const submit = (e) => {
+
+  const addResume = () => {
+    setResumes([...resumes, resumeForm]);
+  };
+
+  useEffect(() => {
+    console.log("Array resume", resumes);
+  }, [resumes]);
+
+  const save = () => {
+    setPopUp(true);
+  };
+
+  const submit = async (e) => {
     e.preventDefault();
+    setPopUp(false);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/admin/about", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify([resumes]),
+      });
+      const data =await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+
     console.log(resumeForm);
     setResumeForm({
       institution: "",
@@ -31,7 +65,7 @@ const Resume = () => {
     <>
       <div className="resume-dashboard">
         <h1>Resume</h1>
-        <form action="" onSubmit={submit}>
+        <form action="">
           <div className="resume-form">
             <div className="resume-form-input">
               <label htmlFor="">Institution</label>
@@ -85,11 +119,18 @@ const Resume = () => {
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <button>Save Changes</button>
-            </div>
+            <div></div>
+          </div>
+          <div className="btn">
+            <button type="button" onClick={addResume}>
+              Add Skills
+            </button>
+            <button type="button" onClick={() => save()}>
+              Save Changes
+            </button>
           </div>
         </form>
+        <Pop handleSubmit={submit} />
       </div>
     </>
   );

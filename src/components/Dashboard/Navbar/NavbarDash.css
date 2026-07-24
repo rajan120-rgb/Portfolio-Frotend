@@ -1,33 +1,32 @@
-.navbar-dashboard{
-    height: 10vh ; 
-    background-color:white ;
-    color: black;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-   
+.navbar-dashboard {
+  height: 10vh;
+  background-color: white;
+  color: black;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
 }
-.navbar-dashboard .logout{
-    padding: 12px 25px;
-    background-color: rgb(109, 109, 246);
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    display: flex;
-   gap: 1rem;
-   position: absolute;
-   right: 40px;
-box-shadow: 0 6px 15px rgba(109, 109, 246, 0.5);
-cursor: pointer;
-transition: background-color 0.3s ease;
+.navbar-dashboard .logout {
+  padding: 12px 25px;
+  background-color: rgb(109, 109, 246);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  right: 40px;
+  box-shadow: 0 6px 15px rgba(109, 109, 246, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-.navbar-dashboard .logout:hover{
-    background-color: rgb(83, 83, 213);
+.navbar-dashboard .logout:hover {
+  background-color: rgb(83, 83, 213);
 }
 .popup-overlay {
   position: fixed;
@@ -37,7 +36,6 @@ transition: background-color 0.3s ease;
   justify-content: center;
   align-items: center;
   animation: fadeIn 0.3s ease;
-  
 }
 
 .popup {
@@ -95,11 +93,11 @@ transition: background-color 0.3s ease;
     opacity: 1;
   }
 }
-@media (max-width:900px){
-  .navbar-dashboard .logout{
-     padding: 6px 15px;
-     font-size: 0.8rem;
-     gap: 0.6rem;
-     border-radius: 5px;
+@media (max-width: 900px) {
+  .navbar-dashboard .logout {
+    padding: 6px 15px;
+    font-size: 0.8rem;
+    gap: 0.6rem;
+    border-radius: 5px;
   }
 }
