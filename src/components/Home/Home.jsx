@@ -13,7 +13,9 @@ import { Api } from "../../Api/Api";
 
 const Home = () => {
   const { setLoading, loading, token } = useContext(LoginContext);
-  const [about, setAbout] = useState([]);
+  const [about, setAbout] = useState(()=>{
+    const saved =  localStorage.getItem("savedData");
+    return saved? saved:""})
 
   useEffect(() => {
     const getAbout = async () => {
@@ -26,7 +28,9 @@ const Home = () => {
         const data = await Api("/public/about");
         console.log(data);
         if (data.success) {
-          setAbout(data.data);
+          const latestAbout = data.data[data.data.length-1];
+          setAbout(latestAbout);
+          localStorage.setItem("savedData", JSON.stringify(latestAbout));
         }
       } catch (error) {
         console.log(error);

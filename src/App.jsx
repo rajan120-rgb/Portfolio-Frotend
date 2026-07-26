@@ -17,6 +17,9 @@ import Resume from "./components/Dashboard/Resume/Resume.jsx";
 import ContentDash from "./components/Dashboard/ContentDash/ContentDash.jsx";
 import ProtectedRoute from "./components/Dashboard/ProtectedRoute/ProtectedRoute.jsx";
 import PublicRoute from "./components/Dashboard/ProtectedRoute/PublicRoute.jsx";
+import AddAbout from "./components/Dashboard/About/AddAbout.jsx";
+import ViewAbout from "./components/Dashboard/About/ViewAbout.jsx";
+import EditAbout from "./components/Dashboard/About/EditAbout.jsx";
 
 const App = () => {
   const { showLogin, loading, token } = useContext(LoginContext);
@@ -66,7 +69,11 @@ const App = () => {
           <Route element={<ProtectedRoute/>}>
              <Route path="/dashboard" element={<Dashboard />}>
               <Route index element={<Navigate to="contentDash" replace />} />
-              <Route path="about" element={<About />} />
+              <Route path="about" element={<About />}/>
+              <Route path="addAbout" element={<AddAbout/>}/>
+              <Route path="viewAbout/:id" element={<ViewAbout/>}/>
+              <Route path="editAbout/:id" element={<EditAbout/>}/>
+              
               <Route path="skill" element={<Skill />} />
               <Route path="resume" element={<Resume />} />
               <Route path="contact" element={<Contact />} />
