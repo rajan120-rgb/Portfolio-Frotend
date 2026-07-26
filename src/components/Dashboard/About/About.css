@@ -2,7 +2,7 @@
   color: black;
   padding: 3rem 0 0 3rem;
 }
-.about-dashboard h1 {
+/* .about-dashboard h1 {
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -11,35 +11,35 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-}
+} */
 /* .about-dashboard .img{
     margin-top: 2.5rem;
     display: flex;
    
     gap: 3rem;
 } */
-.about-dashboard .image-link {
+/* .about-dashboard .image-link {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
-}
-.about-dashboard input {
+} */
+/* .about-dashboard input {
   padding: 10px 5px;
   width: 60vw;
   border: 1px solid gray;
   outline: 1px solid grey;
-}
-.about-dashboard input::placeholder {
+} */
+/* .about-dashboard input::placeholder {
   font-size: 0.8rem;
-}
-.about-dashboard input:focus {
+} */
+/* .about-dashboard input:focus {
   border-color: rgb(109, 109, 246);
   box-shadow: 0 0 10px rgba(109, 109, 246, 0.6);
-}
-.image-link label {
+} */
+/* .image-link label {
   font-size: 1.2rem;
-}
-.about-form-dashboard button {
+} */
+/* .about-form-dashboard button {
   padding: 12px 25px;
   background-color: rgb(109, 109, 246);
   border: none;
@@ -53,4 +53,170 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 10rem;
+} */
+
+
+/* Add About */
+.student-table {
+  width: 80vw;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 12px;
+  border-top: 3px solid rgb(109, 109, 246);
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+  padding: 20px;
 }
+/* .create-student input{
+  width: 90%;
+} */
+
+.student-table h1 {
+  font-size: 1.5rem;
+  font-weight: 450;
+  text-align: center;
+  color: rgb(109, 109, 246);
+}
+.student-table .btn-add {
+  padding: 9px 10px;
+  background: rgb(109, 109, 246);
+  border-radius: 6px;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(107, 63, 160, 0.3);
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: rgb(101, 101, 228);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgb(109, 109, 246, 0.4);
+}
+.student-table table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+}
+.student-table table thead {
+  background-color: rgb(109, 109, 246);
+  color: white;
+}
+.student-table table thead th {
+  padding: 14px;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.student-table table tr td{
+   color: rgb(92, 84, 84);
+}
+.student-table table tbody tr:nth-child(odd) {
+  background-color: #ebe9e7;
+  color: rgb(92, 84, 84);
+  transition: background-color 0.3s ease;
+}
+.student-table table tbody tr:nth-child(odd):hover {
+  background-color: #ccc8c4;
+}
+.student-table table tbody td {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.student-table table tbody td img{
+  width: 40px;
+}
+.student-table tbody .btn {
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  margin-right: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.student-table table tbody td .btn-view {
+  background-color: #3abde1;
+  box-shadow: 0 4px 10px rgba(58, 189, 225, 0.35);
+}
+.student-table table tbody td .btn-edit {
+  background-color: rgb(109, 109, 246);
+  box-shadow: 0 4px 10px rgb(109, 109, 246,0.35);
+}
+.student-table table tbody td .btn-dlt {
+  background-color: #d63949;
+  box-shadow: 0 4px 10px rgba(214, 57, 73, 0.35);
+}
+.btn-view:hover,
+.btn-edit:hover,
+.btn-dlt:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* add student */
+.create-student div:not(:nth-child(6)){
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.create-student div label {
+  font-weight: 600;
+}
+.create-student div input {
+  padding: 10px;
+  width: 50vw;
+  border: 2px solid #ccc;
+}
+.create-student form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.create-student input[type="file"] {
+  width: 50vw;
+  border: 2px solid #ccc;
+  padding: 8px;
+  border-radius: 5px;
+}
+.create-student .btn-view {
+  padding: 9px 10px;
+  background: #6b3fa0;
+  border-radius: 6px;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(107, 63, 160, 0.3);
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8vw;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+.create-student .btn-dlt {
+  padding: 9px 10px;
+  background-color: #d63949;
+  border-radius: 6px;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(107, 63, 160, 0.3);
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8vw;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+/* viewDetails */
+

@@ -1,12 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Api } from "../../Api/Api";
 import "./Bottom.css";
+import { LoginContext } from "../../Context/Context";
 
-const Bottom = ({bottom}) => {
-//  const [bottom, setBottom] = useState("")
-useEffect(()=>{
-   console.log(bottom);
-})
+const Bottom = ({ bottom }) => {
+  const { token } = useContext(LoginContext);
+  const [service, setService] = useState([]);
+
+  useEffect(() => {
+    const getBottom = async () => {
+      try {
+        const data = await Api("/public/services");
+
+        console.log(data);
+
+        if (data.success) {
+          setService(data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getBottom();
+  }, []);
+
   return (
     <>
       <div className="bottom">
@@ -19,48 +37,17 @@ useEffect(()=>{
           </p>
         </div>
         <div className="bottom-container">
-          <div className="bottom-inner-container">
-           <div>
-             <i className="fa-solid icon fa-tv"></i>
-           </div>
-            <h3>Web Development</h3>
-            <p>Blog, E-commerce</p>
-          </div>
-          <div className="bottom-inner-container">
-           <div>
-             <i className="fa-solid icon fa-figma"></i>
-           </div>
-            <h3>UI/UX Design</h3>
-            <p>Website Design</p>
-          </div>
-          <div className="bottom-inner-container">
-           <div>
-             <i className="fa-solid icon fa-microphone"></i>
-           </div>
-            <h3>Sound Design</h3>
-            <p>Voice Over, Beat Making</p>
-          </div>
-          <div className="bottom-inner-container">
-           <div>
-            <i className="fa-solid icon fa-gamepad"></i>
-           </div>
-            <h3>Game Design</h3>
-            <p>Character Design, Props & Objects</p>
-          </div>
-          <div className="bottom-inner-container">
-           <div>
-            <i className="fa-solid icon fa-camera"></i>
-           </div>
-            <h3>Photography</h3>
-            <p>Potrait, Product Photography</p>
-          </div>
-          <div className="bottom-inner-container">
+         {service.map((item, index)=>(
+          <div key={index}>
+           <div className="bottom-inner-container">
             <div>
-            <i className="fa-brands icon fa-adversal"></i>
-           </div>
-            <h3>Advertising</h3>
-            <p>Product Advertising</p>
+              <i className="fa-solid icon fa-tv"></i>
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
           </div>
+          </div>
+         ))}
         </div>
       </div>
     </>

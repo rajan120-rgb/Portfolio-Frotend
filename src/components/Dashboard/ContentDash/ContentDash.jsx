@@ -8,4 +8,4 @@ const ContentDash = () => {
   )
 }
 
-export default ContentDash
+export default ContentDash;
