@@ -13,22 +13,23 @@ import { Api } from "../../Api/Api";
 
 const Home = () => {
   const { setLoading, loading, token } = useContext(LoginContext);
-  const [about, setAbout] = useState(()=>{
-    const saved =  localStorage.getItem("savedData");
-    return saved? saved:""})
+  const [about, setAbout] = useState(() => {
+    const saved = localStorage.getItem("savedData");
+    return saved ? JSON.parse(saved) : "";
+  });
+  
 
   useEffect(() => {
+    // if(about){
+    //   setLoading(false)
+    //   return
+    // }
     const getAbout = async () => {
-      // if (!token) {
-      //   setLoading(false);
-      //   return;
-      // }
-      // console.log("Token is ", token);
       try {
         const data = await Api("/public/about");
         console.log(data);
         if (data.success) {
-          const latestAbout = data.data[data.data.length-1];
+          const latestAbout = data.data[data.data.length - 1];
           setAbout(latestAbout);
           localStorage.setItem("savedData", JSON.stringify(latestAbout));
         }
@@ -40,11 +41,11 @@ const Home = () => {
     };
 
     getAbout();
-  }, [token,setLoading]);
+  }, []);
 
   return (
     <div>
-      {loading ? (
+      {/* {loading ? (
         <div className="loader-wrapper">
           <div className="loader">
             <div className="circle c1"></div>
@@ -52,7 +53,7 @@ const Home = () => {
             <div className="circle c3"></div>
           </div>
         </div>
-      ) : (
+      ) : ( */}
         <>
           <Navbar />
           <About data={about} />
@@ -61,7 +62,7 @@ const Home = () => {
           <Contact />
           <Footer />
         </>
-      )}
+      {/* )} */}
     </div>
   );
 };

@@ -3,8 +3,7 @@ import "./Sidebar.css";
 import { Link as RouterLink } from "react-router-dom";
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const Sidebar = () => {
-  const [open , setOpen] = useState(true);
+const Sidebar = ({open,setOpen}) => {
   return (
     <>
       <div className={`sidebar ${open ? "open" : "closed"}`}>
@@ -27,6 +26,15 @@ const Sidebar = () => {
                 )}
               </li>
             </RouterLink>
+            <RouterLink to="/dashboard/service">
+             
+              <li>
+                <i class="fa-solid fa-bell-concierge"></i>
+                {open && (
+                  <span>Service</span>
+                )}
+              </li>
+            </RouterLink>
             <RouterLink to="/dashboard/skill">
               <li>
                 <i className="fa-solid fa-star-half-stroke"></i>
@@ -43,11 +51,11 @@ const Sidebar = () => {
                 )}
               </li>
             </RouterLink>
-            <RouterLink to="/dashboard/contact">
+            <RouterLink to="/dashboard/certificate">
               <li>
                 <i className="fa-solid fa-envelope"></i>
                  {open && (
-                  <span>Contact</span>
+                  <span>Certificate</span>
                 )}
               </li>
             </RouterLink>

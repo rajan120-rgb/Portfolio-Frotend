@@ -1,6 +1,8 @@
 import React, { useContext, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../../Context/Context";
+import Pop from "../PopUp/Pop";
+import { toast } from "react-toastify";
 
 const AddAbout = () => {
   const navigate = useNavigate();
@@ -37,6 +39,26 @@ const AddAbout = () => {
   };
 
   const handleSubmit = async (e) => {
+    if(!image.profile_image){
+      toast.error("Image is required")
+      return;
+    }
+    if(!image.resume){
+      toast.error("Resume is required")
+      return;
+    }
+    if(!formData.name.trim()){
+      toast.error("Name is Required")
+      return;
+    }
+    if(!formData.profession.trim()){
+      toast.error("Profession is Required")
+      return;
+    }
+    if(!formData.description.trim()){
+      toast.error("Image is Required")
+      return;
+    }
     e.preventDefault();
     setPopUp(false);
     const data = new FormData();
@@ -81,12 +103,13 @@ const AddAbout = () => {
     } catch (error) {
       console.log(error);
     }
+    navigate("/dashboard/about")
   };
 
   return (
     <>
       <div className="create-student student-table">
-        <h1>Add New Student</h1>
+        <h1>Add New About</h1>
         <form action="" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="image">Image:</label>
@@ -98,6 +121,7 @@ const AddAbout = () => {
               placeholder="Enter Your Url "
               onChange={handleImage}
               accept="image/*"
+              required
             />
           </div>
           <div>
@@ -110,6 +134,7 @@ const AddAbout = () => {
               // value={formData.name}
               placeholder="Upload Your CV "
               onChange={handleImage}
+              required
             />
           </div>
           <div>
@@ -118,9 +143,10 @@ const AddAbout = () => {
               type="text"
               id="place"
               name="name"
-              value={formData.name || ""}
+              value={formData.name }
               placeholder="Enter Your Name "
               onChange={handleChange}
+              required
             />
           </div>
           <div>
@@ -129,9 +155,10 @@ const AddAbout = () => {
               type="text"
               id="profession"
               name="profession"
-              value={formData.profession || ""}
+              value={formData.profession }
               placeholder="Enter Your Profession "
               onChange={handleChange}
+              required
             />
           </div>
           <div>
@@ -139,14 +166,17 @@ const AddAbout = () => {
             <input
               type="text"
               name="description"
-              value={formData.description || ""}
+              value={formData.description }
               placeholder="Enter Your Description "
               onChange={handleChange}
+              required
             />
           </div>
 
           <div>
-            <button className="btn-view" type="submit" onClick={()=>navigate("/dashboard/about")}>
+            <button className="btn-view" type="button" onClick={()=>{
+              save();
+            }}>
               Save
             </button>
             <button
@@ -158,6 +188,7 @@ const AddAbout = () => {
             </button>
           </div>
         </form>
+        <Pop handleSubmit={handleSubmit}/>
       </div>
     </>
   );

@@ -1,31 +1,26 @@
-import React from 'react'
+import React, { useState } from "react";
 import "./Dashboard.css";
-import Sidebar from './Sidebar/Sidebar'
-import Main from './Main/Main'
+import Sidebar from "./Sidebar/Sidebar";
+import Main from "./Main/Main";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
-
-
-
 const Dashboard = () => {
+  const [open, setOpen] = useState(true);
   return (
     <>
-    <div className='dash'>
-    <div className="dashboard">
-        <Sidebar/>
-      <Main/>
-    </div>
-    </div>
+      <div className="dash">
+        <div className="dashboard">
+          <Sidebar open={open} setOpen={setOpen} />
+          <div className={`main ${open ? "" : "expanded"}`}>
+            <Main />
+          </div>
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
-
-
-
-
+export default Dashboard;
 
 // import { useState } from "react";
 // import "./Dashboard.css";
@@ -129,22 +124,17 @@ export default Dashboard
 
 // export default Dashboard;
 
-
-
 // const handleSave = async () => {
 
 //   const formDataToSend = new FormData();
-
 
 //   Object.entries(formData).forEach(([key, value]) => {
 //     formDataToSend.append(key, value);
 //   });
 
-
 //   if (image) {
 //     formDataToSend.append("image", image);
 //   }
-
 
 //   try {
 
@@ -156,13 +146,11 @@ export default Dashboard
 //       }
 //     );
 
-
 //     const result = await response.json();
 
 //     console.log(result);
 
 //     alert("Saved Successfully");
-
 
 //   } catch(error) {
 

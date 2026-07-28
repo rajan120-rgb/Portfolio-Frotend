@@ -5,8 +5,14 @@ import { LoginContext } from "../../../Context/Context";
 
 const Resume = () => {
   const { token } = useContext(LoginContext);
-  const [resume, setResume] = useState([]);
-  const [certificate, setCertificate] = useState([]);
+  const [resume, setResume] = useState(()=>{
+    const saved1 = localStorage.getItem("resume");
+    return saved1? JSON.parse(saved1):[];
+  });
+  const [certificate, setCertificate] = useState(()=>{
+    const saved = localStorage.getItem("certificate");
+    return saved? JSON.parse(saved):[];
+  });
 
   useEffect(() => {
     const getData = async () => {
@@ -17,6 +23,7 @@ const Resume = () => {
 
         if (data.success) {
           setResume(data.data);
+          localStorage.setItem("resume", JSON.stringify(data.data))
         }
       } catch (error) {
         console.log(error);
@@ -30,11 +37,10 @@ const Resume = () => {
     const getResumeData = async () => {
       try {
         const data = await Api("/public/certificates");
-
         console.log(data);
-
         if (data.success) {
           setCertificate(data.data);
+          localStorage.setItem("certificate",JSON.stringify(data.data))
         }
       } catch (error) {
         console.log(error);
