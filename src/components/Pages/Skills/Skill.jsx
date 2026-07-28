@@ -5,7 +5,10 @@ import { LoginContext } from "../../../Context/Context";
 
 const Skill = () => {
   const { token } = useContext(LoginContext)
-const [skill, setSkill] = useState([])
+const [skill, setSkill] = useState(()=>{
+  const saved = localStorage.getItem("skill");
+  return saved? JSON.parse(saved):[];
+})
 
 
     useEffect(() => {
@@ -17,6 +20,7 @@ const [skill, setSkill] = useState([])
    
            if (data.success) {
              setSkill(data.data);
+             localStorage.setItem("skill",JSON.stringify(data.data))
            }
          } catch (error) {
            console.log(error);

@@ -181,6 +181,7 @@
 .create-student form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 .create-student input[type="file"] {
@@ -219,4 +220,13 @@
 }
 
 /* viewDetails */
+.view-detail p{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.view-detail p img{
+  width: 30px;
+}
 
+/* responsiveness */

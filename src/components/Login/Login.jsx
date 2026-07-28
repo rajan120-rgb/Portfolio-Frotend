@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { toast, Bounce } from "react-toastify";
-import { Link as RouterLink } from "react-router-dom";
+import { Link, Outlet, Link as RouterLink } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/Context.jsx";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard.jsx";
+import Pop from "../Dashboard/PopUp/Pop.jsx";
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState({
@@ -40,7 +41,7 @@ const Login = () => {
       toast.error("Password is required");
       return;
     }
-
+    console.log(loginForm);
     try {
       const response = await fetch("http://localhost:8000/api/auth/login", {
         method: "Post",
@@ -68,7 +69,6 @@ const Login = () => {
     }
   };
 
-
   return (
     <div className="login-signup">
       <div className="loginsignup-container">
@@ -76,7 +76,7 @@ const Login = () => {
           ✖
         </button>
 
-        <h1>Sign Up</h1>
+        <h1>Login</h1>
 
         <form className="loginsignup-field">
           {/* <input 
@@ -108,8 +108,10 @@ const Login = () => {
         </form>
 
         <p className="loginsignup-login">
-          Already have an account?
-          <span> Login Here</span>
+          Don't have an account?
+          <Link to="/signUp">
+            <span> Sign Up</span>
+          </Link>
         </p>
 
         <div className="loginsignup-agree">

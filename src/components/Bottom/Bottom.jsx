@@ -5,23 +5,24 @@ import { LoginContext } from "../../Context/Context";
 
 const Bottom = ({ bottom }) => {
   const { token } = useContext(LoginContext);
-  const [service, setService] = useState([]);
+  const [service, setService] = useState(()=>{
+    const saved = localStorage.getItem("service");
+    return saved? JSON.parse(saved):[];
+  });
 
   useEffect(() => {
     const getBottom = async () => {
       try {
         const data = await Api("/public/services");
-
         console.log(data);
-
         if (data.success) {
           setService(data.data);
+          localStorage.setItem("service",JSON.stringify(data.data))
         }
       } catch (error) {
         console.log(error);
       }
     };
-
     getBottom();
   }, []);
 

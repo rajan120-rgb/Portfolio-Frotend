@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Api } from "../../../Api/Api";
+import React, { useContext,useState,useEffect } from "react";
 import { LoginContext } from "../../../Context/Context";
+import { Api } from "../../../Api/Api";
+import { useNavigate } from "react-router-dom";
 import Pop from "../PopUp/Pop";
 
-const Resume = () => {
+const Certificate = () => {
   const { setPopUp, token } = useContext(LoginContext);
   const navigate = useNavigate();
   const [selectedID, setSelectedID] = useState("");
-  const [resumeTable, setResumeTable] = useState(() => {
+  const [certificateTable, setCertificateTable] = useState(() => {
     const saved = localStorage.getItem("resumeTable");
     return saved ? JSON.parse(saved) : [];
   });
@@ -22,7 +22,7 @@ const Resume = () => {
     setPopUp(false);
     try {
       const dltResponse = await fetch(
-        `http://localhost:8000/api/admin/educations/${id}`,
+        `http://localhost:8000/api/admin/certificates/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -39,12 +39,12 @@ const Resume = () => {
   useEffect(() => {
     const table = async () => {
       try {
-        const response = await Api("/public/educations");
+        const response = await Api("/public/certificates");
         console.log(response);
         console.log(response.data);
         if (response.success) {
           const data = response.data;
-          setResumeTable(data);
+          setCertificateTable(data);
           localStorage.setItem("resumeTable", JSON.stringify(data));
         }
       } catch (error) {
@@ -56,11 +56,11 @@ const Resume = () => {
   return (
     <>
       <div className="student-table">
-        <h1>Portfolio Table Resume</h1>
+        <h1>Portfolio Table Certificate</h1>
         <div className="table-container">
           <button
             className="btn btn-add"
-            onClick={() => navigate("/dashboard/addResume")}
+            onClick={() => navigate("/dashboard/addCertificate")}
           >
             Add New Data
           </button>
@@ -69,28 +69,22 @@ const Resume = () => {
             <thead>
               <tr>
                 <th>SN</th>
-                <th>Institution</th>
-                <th>Year</th>
-                <th>Degree</th>
-                <th>Faculty</th>
-                <th>GPA</th>
+                <th>Title</th>
+                <th>Organization</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {resumeTable.map((item, index) => (
+              {certificateTable.map((item, index) => (
                 <tr key={index}>
                   <td>{index+1}</td>
-                  <td>{item.institution_name}</td>
-                  <td>{item.start_year}</td>
-                  <td style={{ maxWidth: "300px" }}>{item.degree}</td>
-                   <td>{item.field_of_study}</td>
-                   <td>{item.gpa}</td>
+                  <td>{item.title}</td>
+                  <td>{item.organization}</td>
                   <td>
                     <button
                       className="btn btn-view"
                       onClick={() =>
-                        navigate(`/dashboard/viewResume/${item.id}`)
+                        navigate(`/dashboard/viewCertificate/${item.id}`)
                       }
                     >
                       View
@@ -99,7 +93,7 @@ const Resume = () => {
                     <button
                       className="btn btn-edit"
                       onClick={() =>
-                        navigate(`/dashboard/editResume/${item.id}`)
+                        navigate(`/dashboard/editCertificate/${item.id}`)
                       }
                     >
                       Edit
@@ -123,4 +117,4 @@ const Resume = () => {
   );
 };
 
-export default Resume;
+export default Certificate;

@@ -6,6 +6,9 @@
   align-items: center;
   flex-shrink: 0;
   transition: width 0.5s ease;
+  /* position: fixed;
+  inset: 0;
+  z-index: 1000; */
   /* height: 100vh;
     /* padding-left: 2rem; */
 }
