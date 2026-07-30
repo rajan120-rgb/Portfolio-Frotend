@@ -97,6 +97,11 @@ thead th {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   color: rgb(213, 197, 197);
 }
+@media (max-width: 1300px) {
+  .resume-certification > div:nth-child(3) {
+    display: none;
+  }
+}
 @media (max-width: 800px) {
   .resume-table {
     width: 100%;
@@ -137,7 +142,7 @@ thead th {
     width: 90%;
     max-width: 320px;
   }
-   /* .strength-grid {
+  /* .strength-grid {
     grid-template-columns: 1fr;
     width: 90%;
     margin: 2 auto;
@@ -146,11 +151,10 @@ thead th {
     width: 100%;
     max-width: 320px;
   } */
-   .resume-strength{
+  .resume-strength {
     display: none;
-   }
-   .resume-education .certificate{
+  }
+  .resume-education .certificate {
     text-align: center;
-   }
+  }
 }
-

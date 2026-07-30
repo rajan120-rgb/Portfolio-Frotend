@@ -2,59 +2,6 @@
   color: black;
   padding: 3rem 0 0 3rem;
 }
-/* .about-dashboard h1 {
-  font-size: 1.5rem;
-  font-weight: 400;
-}
-.about-dashboard .image-url {
-  margin-top: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-} */
-/* .about-dashboard .img{
-    margin-top: 2.5rem;
-    display: flex;
-   
-    gap: 3rem;
-} */
-/* .about-dashboard .image-link {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-} */
-/* .about-dashboard input {
-  padding: 10px 5px;
-  width: 60vw;
-  border: 1px solid gray;
-  outline: 1px solid grey;
-} */
-/* .about-dashboard input::placeholder {
-  font-size: 0.8rem;
-} */
-/* .about-dashboard input:focus {
-  border-color: rgb(109, 109, 246);
-  box-shadow: 0 0 10px rgba(109, 109, 246, 0.6);
-} */
-/* .image-link label {
-  font-size: 1.2rem;
-} */
-/* .about-form-dashboard button {
-  padding: 12px 25px;
-  background-color: rgb(109, 109, 246);
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  display: flex;
-  gap: 1rem;
-  box-shadow: 0 6px 15px rgba(109, 109, 246, 0.5);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 10rem;
-} */
-
 
 /* Add About */
 .student-table {
@@ -172,6 +119,7 @@
 }
 .create-student div label {
   font-weight: 600;
+  color:  black;
 }
 .create-student div input {
   padding: 10px;
@@ -230,3 +178,132 @@
 }
 
 /* responsiveness */
+/* =========================
+   1400px and below
+========================= */
+@media (max-width: 1400px) {
+  .about-dashboard {
+    padding: 2rem;
+  }
+
+  .student-table {
+    width: calc(100% - 2rem);
+    margin: 30px auto;
+    padding: 18px;
+  }
+   .student-table tbody .btn{
+     padding: 5px 8px;
+   }
+
+  .create-student .btn-view,
+  .create-student .btn-dlt {
+    width: 90px;
+  }
+}
+@media (max-width: 1200px) {
+  .student-table {
+    overflow-x: auto;
+  }
+
+  .student-table table {
+    min-width: 900px;
+  }
+
+  
+}
+
+/* =========================
+   992px and below
+========================= */
+@media (max-width: 992px) {
+  .about-dashboard {
+    padding: 1.5rem;
+  }
+
+  .student-table {
+    width: calc(100% - 1rem);
+    padding: 15px;
+  }
+
+  .student-table h1 {
+    font-size: 1.3rem;
+  }
+
+  .student-table .btn-add {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  .create-student form {
+    width: 100%;
+  }
+
+  .create-student div {
+    width: 100%;
+  }
+
+  .create-student .btn-view,
+  .create-student .btn-dlt {
+    width: 100px;
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================
+   768px and below
+========================= */
+@media (max-width: 768px) {
+  .about-dashboard {
+    padding: 1rem;
+  }
+
+  .student-table {
+    padding: 12px;
+  }
+
+  .student-table table th,
+  .student-table table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .student-table tbody .btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    margin-right: 0.4rem;
+  }
+
+  .create-student .btn-view,
+  .create-student .btn-dlt {
+    width: 90px;
+  }
+}
+
+/* =========================
+   576px and below
+========================= */
+@media (max-width: 576px) {
+  .about-dashboard {
+    padding: 0.8rem;
+  }
+
+  .student-table {
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .student-table h1 {
+    font-size: 1.1rem;
+  }
+
+  .student-table .btn-add {
+    width: 100%;
+  }
+
+  .create-student .btn-view,
+  .create-student .btn-dlt {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}

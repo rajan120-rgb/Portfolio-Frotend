@@ -112,7 +112,7 @@
   background-color: wheat;
   /* border: none; */
 }
-@media (max-width: 1380px) {
+@media (max-width: 1100px) {
   .hero {
     height: auto;
   }

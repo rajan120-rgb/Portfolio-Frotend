@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../../Context/Context";
 import Pop from "../PopUp/Pop";
 import { toast } from "react-toastify";
+import { handleSave } from "../../utils/handleSave";
+import { handleEnter } from "../../utils/KeyboardNavigation";
 
 const AddService = () => {
-  const { setPopUp, token } = useContext(LoginContext);
+  const { setPopUp, token ,popUp} = useContext(LoginContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -20,6 +22,16 @@ const AddService = () => {
   const save = () => {
     setPopUp(true);
   };
+
+   useEffect(()=>{
+      const keyHandler = (e)=>{
+        handleSave(e,popUp,setPopUp,handleSubmit);
+      };
+      document.addEventListener("keydown",keyHandler)
+      return ()=>{
+        document.removeEventListener("keydown",keyHandler)
+      };
+    },[popUp])
 
   const handleSubmit = async (e) => {
     if (!formData.title.trim()) {
@@ -65,6 +77,7 @@ const AddService = () => {
               value={formData.title || ""}
               placeholder="Enter Your Title "
               onChange={handleChange}
+               onKeyDown={handleEnter}
               required
             />
           </div>
@@ -77,6 +90,7 @@ const AddService = () => {
               value={formData.description || ""}
               placeholder="Enter Your Description "
               onChange={handleChange}
+               onKeyDown={handleEnter}
               required
             />
           </div>

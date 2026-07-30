@@ -1,12 +1,14 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../../Context/Context";
 import Pop from "../PopUp/Pop";
 import { toast } from "react-toastify";
+import { handleSave } from "../../utils/handleSave";
+import { handleEnter } from "../../utils/KeyboardNavigation";
 
 const AddAbout = () => {
   const navigate = useNavigate();
-  const { token, setPopUp } = useContext(LoginContext);
+  const { token, setPopUp,popUp } = useContext(LoginContext);
   const [formData, setFormData] = useState({
     name: "",
     profession: "",
@@ -37,6 +39,16 @@ const AddAbout = () => {
   const save = () => {
     setPopUp(true);
   };
+
+   useEffect(()=>{
+      const keyHandler = (e)=>{
+        handleSave(e,popUp,setPopUp,handleSubmit);
+      };
+      document.addEventListener("keydown",keyHandler)
+      return ()=>{
+        document.removeEventListener("keydown",keyHandler)
+      };
+    },[popUp])
 
   const handleSubmit = async (e) => {
     if(!image.profile_image){
@@ -121,6 +133,7 @@ const AddAbout = () => {
               placeholder="Enter Your Url "
               onChange={handleImage}
               accept="image/*"
+              onKeyDown={handleEnter}
               required
             />
           </div>
@@ -134,6 +147,7 @@ const AddAbout = () => {
               // value={formData.name}
               placeholder="Upload Your CV "
               onChange={handleImage}
+              onKeyDown={handleEnter}
               required
             />
           </div>
@@ -146,6 +160,7 @@ const AddAbout = () => {
               value={formData.name }
               placeholder="Enter Your Name "
               onChange={handleChange}
+              onKeyDown={handleEnter}
               required
             />
           </div>
@@ -158,6 +173,7 @@ const AddAbout = () => {
               value={formData.profession }
               placeholder="Enter Your Profession "
               onChange={handleChange}
+              onKeyDown={handleEnter}
               required
             />
           </div>
@@ -169,6 +185,7 @@ const AddAbout = () => {
               value={formData.description }
               placeholder="Enter Your Description "
               onChange={handleChange}
+              onKeyDown={handleEnter}
               required
             />
           </div>

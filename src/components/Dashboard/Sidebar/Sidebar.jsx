@@ -11,6 +11,7 @@ const Sidebar = ({open,setOpen}) => {
           {/* {open && ( */}
             <RouterLink to="/dashboard/contentDash">
             <h2>Portfolio  <br /><span>Admin</span></h2>
+            <i class="fa-solid fa-tachograph-digital"></i>
             </RouterLink>
           {/* // )} */}
           <i className="fa-solid fa-bars" onClick={()=>setOpen(!open)}></i>

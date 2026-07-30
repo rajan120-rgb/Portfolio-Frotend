@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../../Context/Context";
 import Pop from "../PopUp/Pop";
 import { toast } from "react-toastify";
+import { handleSave } from "../../utils/handleSave";
+import { handleEnter } from "../../utils/KeyboardNavigation";
 
 const AddResume = () => {
-  const { setPopUp, token } = useContext(LoginContext);
+  const { setPopUp, token ,popUp} = useContext(LoginContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     institution_name: "",
@@ -23,6 +25,16 @@ const AddResume = () => {
   const save = () => {
     setPopUp(true);
   };
+
+   useEffect(()=>{
+      const keyHandler = (e)=>{
+        handleSave(e,popUp,setPopUp,handleSubmit);
+      };
+      document.addEventListener("keydown",keyHandler)
+      return ()=>{
+        document.removeEventListener("keydown",keyHandler)
+      };
+    },[popUp])
 
   const handleSubmit = async (e) => {
     if(!formData.institution_name.trim()){
@@ -83,6 +95,7 @@ const AddResume = () => {
               value={formData.institution_name || ""}
               placeholder="Enter Your Institution "
               onChange={handleChange}
+              onKeyDown={handleEnter}
               required
             />
           </div>
@@ -95,6 +108,7 @@ const AddResume = () => {
               value={formData.start_year || ""}
               placeholder="Enter Your Year "
               onChange={handleChange}
+               onKeyDown={handleEnter}
               required
             />
           </div>
@@ -107,6 +121,7 @@ const AddResume = () => {
               value={formData.degree || ""}
               placeholder="Enter Your Degree "
               onChange={handleChange}
+               onKeyDown={handleEnter}
               required
             />
           </div>
@@ -119,6 +134,7 @@ const AddResume = () => {
               value={formData.field_of_study || ""}
               placeholder="Enter Your Faculty "
               onChange={handleChange}
+               onKeyDown={handleEnter}
               required
             />
           </div>
@@ -131,6 +147,7 @@ const AddResume = () => {
               value={formData.gpa || ""}
               placeholder="Enter Your GPA "
               onChange={handleChange}
+               onKeyDown={handleEnter}
               required
             />
           </div>

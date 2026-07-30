@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Api } from "../../Api/Api";
 import "./Bottom.css";
 import { LoginContext } from "../../Context/Context";
+import { motion } from "framer-motion";
 
 const Bottom = ({ bottom }) => {
   const { token } = useContext(LoginContext);
@@ -28,7 +29,12 @@ const Bottom = ({ bottom }) => {
 
   return (
     <>
-      <div className="bottom">
+      <motion.div
+      initial={{y:200,opacity:0,scale:0.9}}
+      whileInView={{y:0,opacity:1,scale:1}}
+      transition={{duration:0.9}}
+      viewport={{ once: true, amount: 0.1 }}
+       className="bottom">
         <div className="bottom-main-heading">
           <h1>My Services</h1>
           <p className="bottom-para">
@@ -42,7 +48,6 @@ const Bottom = ({ bottom }) => {
           <div key={index}>
            <div className="bottom-inner-container">
             <div>
-              <i className="fa-solid icon fa-tv"></i>
             </div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
@@ -50,7 +55,7 @@ const Bottom = ({ bottom }) => {
           </div>
          ))}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

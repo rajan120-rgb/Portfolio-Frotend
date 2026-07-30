@@ -10,7 +10,7 @@ const Navbar = () => {
   const { setToken } = useContext(LoginContext)
   const logout = () => {
     toast.error("Logout Successfully!");
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     setToken("");
     navigate("/login");
   };

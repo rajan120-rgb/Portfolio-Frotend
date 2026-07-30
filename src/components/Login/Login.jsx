@@ -7,6 +7,8 @@ import { LoginContext } from "../../Context/Context.jsx";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard.jsx";
 import Pop from "../Dashboard/PopUp/Pop.jsx";
+import { handleEnter } from "../utils/KeyboardNavigation.js";
+import { handleSave } from "../utils/handleSave.js";
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState({
@@ -14,14 +16,17 @@ const Login = () => {
     password: "",
   });
   // const [error, setError] = useState("");
-  const { closeLogin, setToken, token } = useContext(LoginContext);
+  const { closeLogin, setToken, token,popUp,setPopUp } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleClose = () => {
     closeLogin();
     navigate("/");
   };
-
+const save = (e)=>{
+  e.preventDefault();
+  setPopUp(true);
+}
   const handleChange = (e) => {
     setLoginForm({
       ...loginForm,
@@ -29,9 +34,18 @@ const Login = () => {
     });
   };
 
+  useEffect(()=>{
+    const keyHandler = (e)=>{
+      handleSave(e,popUp,setPopUp,logIn);
+    }
+    document.addEventListener("keydown",keyHandler);
+    return ()=>{
+      document.removeEventListener("keydown",keyHandler)
+    }
+  },[popUp])
+
   const logIn = async (e) => {
     e.preventDefault();
-
     if (!loginForm.email.trim()) {
       toast.error("Email is required");
       return;
@@ -54,9 +68,9 @@ const Login = () => {
       console.log("Login response:", data);
 
       if (response.ok) {
+        setPopUp(false);
         setToken(data.token);
-
-        localStorage.setItem("token", data.token);
+        sessionStorage.setItem("token", data.token);
 
         navigate("/dashboard");
         toast.success("Log in Successfully!");
@@ -91,6 +105,7 @@ const Login = () => {
             required
             value={loginForm.email}
             onChange={handleChange}
+            onKeyDown={handleEnter}
           />
 
           <input
@@ -100,9 +115,10 @@ const Login = () => {
             required
             value={loginForm.password}
             onChange={handleChange}
+             onKeyDown={handleEnter}
           />
 
-          <button className="btn-continue" onClick={logIn}>
+          <button className="btn-continue" onClick={save}>
             Continue
           </button>
         </form>
@@ -120,6 +136,7 @@ const Login = () => {
           <p>By continuing, I agree to the terms of use and privacy policy.</p>
         </div>
       </div>
+      <Pop handleSubmit={logIn}/>
     </div>
   );
 };

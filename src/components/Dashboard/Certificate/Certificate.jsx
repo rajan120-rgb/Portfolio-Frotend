@@ -9,7 +9,7 @@ const Certificate = () => {
   const navigate = useNavigate();
   const [selectedID, setSelectedID] = useState("");
   const [certificateTable, setCertificateTable] = useState(() => {
-    const saved = localStorage.getItem("resumeTable");
+    const saved = localStorage.getItem("certificateTable");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -31,6 +31,11 @@ const Certificate = () => {
         },
       );
       console.log(dltResponse.status);
+      if(dltResponse.ok){
+        const certificate = certificateTable.filter((item)=>item.id!==id);
+        setCertificateTable(certificate);
+        localStorage.setItem("certificateTable",JSON.stringify(certificate))
+      }
     } catch (error) {
       console.log("Error is:", error);
     }
@@ -45,7 +50,7 @@ const Certificate = () => {
         if (response.success) {
           const data = response.data;
           setCertificateTable(data);
-          localStorage.setItem("resumeTable", JSON.stringify(data));
+          localStorage.setItem("certificateTable", JSON.stringify(data));
         }
       } catch (error) {
         console.log("Unable to fetching....", error);
