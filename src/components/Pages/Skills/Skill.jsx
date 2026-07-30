@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Skill.css";
 import { Api } from "../../../Api/Api";
 import { LoginContext } from "../../../Context/Context";
+import { motion } from "framer-motion";
 
 const Skill = () => {
   const { token } = useContext(LoginContext)
@@ -44,7 +45,12 @@ const [skill, setSkill] = useState(()=>{
 
   return (
     <>
-      <section id="skills">
+      <motion.div
+      initial={{y:200,opacity:0, scale:0.9}}
+      whileInView={{y:0,opacity:1,scale:1}}
+      transition={{duration:0.9}}
+      viewport={{ once: true, amount: 0.1 }}
+       id="skills">
         <div className="skill-description">
           <h1>My Skills</h1>
           <p>
@@ -82,7 +88,7 @@ const [skill, setSkill] = useState(()=>{
            
           ))}
         </div>
-      </section>
+      </motion.div>
     </>
   );
 };

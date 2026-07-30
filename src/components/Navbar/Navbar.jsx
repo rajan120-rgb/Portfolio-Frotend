@@ -162,11 +162,6 @@ const Navbar = () => {
                   Contact
                 </Link>
               </li>
-              <li>
-                <div className="login">
-                  <button onClick={openLogin}>Login</button>
-                </div>
-              </li>
             </div>
           )}
         </div>

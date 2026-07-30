@@ -6,6 +6,7 @@ import profile_image from "../assets/Portfolio-rajan.jpg";
 import CV from "../assets/CV.png";
 import Swal from "sweetalert2";
 import { Link, scrollSpy } from "react-scroll";
+import { easeIn, motion } from "framer-motion";
 //  import {  toast } from 'react-toastify';
 
 const Hero = ({ hero }) => {
@@ -25,8 +26,11 @@ const Hero = ({ hero }) => {
       if (result.isConfirmed) {
         const link = document.createElement("a");
         link.href = hero.resume;
-        link.download = "_blank";
+        link.setAttribute("download", "Resume.pdf");
+
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
 
         Swal.fire({
           title: "Downloaded!",
@@ -53,10 +57,20 @@ const Hero = ({ hero }) => {
     <>
       <div className="hero">
         <div className="hero-left">
-          <div className="hero-main-profile">
+          <motion.div
+            initial={{ opacity: 0, x: -100, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="hero-main-profile"
+          >
             <img src={hero.profile_image} alt="Profile" />
-          </div>
-          <div className="hero-intro">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.6, ease: easeIn }}
+            className="hero-intro"
+          >
             <div className="hero-intro-hellow">
               <h1>
                 Hey , I am {hero.name}{" "}
@@ -129,7 +143,7 @@ const Hero = ({ hero }) => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

@@ -5,6 +5,7 @@ import FacebookIcon from "../../assets/facebook-icon.png";
 import TwitterIcon from "../../assets/twitter.png";
 import YoutubeIcon from "../../assets/youtube.png";
 import InstagramIcon from "../../assets/instagram.png";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const [value, setValue] = useState({
@@ -46,9 +47,15 @@ const Contact = () => {
   return (
     <>
       <section id="contacts">
-        <div id="contactPage">
+        <motion.div
+          initial={{ y: 200, opacity: 0, scale:0.9 }}
+          whileInView={{ y: 0, opacity: 1,scale:1 }}
+          transition={{ duration: 0.9 }}
+          viewport={{ once: true, amount: 0.1 }}
+          id="contactPage"
+        >
           <h1 className="contactPageTitle">Contact Me</h1>
-         <p  className="contact-description">
+          <p className="contact-description">
             Please fill out the form below to discuss any work opportunities.
           </p>
           <form
@@ -95,11 +102,10 @@ const Contact = () => {
               <img src={InstagramIcon} alt="" className="linkImg" />
             </div> */}
           </form>
-        </div>
+        </motion.div>
       </section>
     </>
   );
 };
 
 export default Contact;
-

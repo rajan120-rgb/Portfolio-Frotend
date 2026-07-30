@@ -21,6 +21,12 @@
   border-bottom: 1px solid black;
   transition: gap 0.5s ease;
 }
+.sidebar .closed-bar h2{
+  display: none;
+}
+.sidebar .closed-bar .fa-tachograph-digital{
+  display: block;
+}
 .sidebar .closed-bar {
   flex-direction: column-reverse;
   gap: 1rem;
@@ -76,4 +82,26 @@
 .sidebar ul li {
   display: flex;
   gap: 9px;
+}
+.sidebar .fa-tachograph-digital{
+  display: none;
+}
+@media (max-width: 900px) {
+  .sidebar li {
+    justify-content: center;
+  }
+
+  .sidebar li span {
+    display: none;
+  }
+.sidebar .fa-tachograph-digital{
+  display: block;
+}
+.sidebar h2{
+  display: none;
+}
+.sidebar .top-bar{
+  align-items: center;
+  flex-direction: column;
+}
 }

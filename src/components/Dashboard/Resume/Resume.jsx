@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Api } from "../../../Api/Api";
 import { LoginContext } from "../../../Context/Context";
 import Pop from "../PopUp/Pop";
+import { FileX } from "lucide-react";
 
 const Resume = () => {
   const { setPopUp, token } = useContext(LoginContext);

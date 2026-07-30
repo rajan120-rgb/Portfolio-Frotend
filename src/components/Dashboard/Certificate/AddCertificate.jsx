@@ -1,11 +1,13 @@
-import React, { useContext,useState,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { LoginContext } from '../../../Context/Context';
-import Pop from '../PopUp/Pop';
-import { toast } from 'react-toastify';
+import React, { useContext, useState, useEffect, use } from "react";
+import { useNavigate } from "react-router-dom";
+import { LoginContext } from "../../../Context/Context";
+import Pop from "../PopUp/Pop";
+import { toast } from "react-toastify";
+import { handleEnter } from "../../utils/KeyboardNavigation";
+import { handleSave } from "../../utils/handleSave";
 
 const AddCertificate = () => {
-     const { setPopUp, token } = useContext(LoginContext);
+  const { setPopUp, token ,popUp} = useContext(LoginContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -21,16 +23,25 @@ const AddCertificate = () => {
     setPopUp(true);
   };
 
+  useEffect(()=>{
+    const keyHandler = (e)=>{
+      handleSave(e,popUp,setPopUp,handleSubmit);
+    };
+    document.addEventListener("keydown",keyHandler)
+    return ()=>{
+      document.removeEventListener("keydown",keyHandler)
+    };
+  },[popUp])
+
   const handleSubmit = async (e) => {
-    if(!formData.title.trim()){
-      toast.error("Title is required")
+    if (!formData.title.trim()) {
+      toast.error("Title is required");
       return;
     }
-    if(!formData.organization.trim()){
+    if (!formData.organization.trim()) {
       toast.error("Organization name is required");
       return;
     }
-
     e.preventDefault();
     setPopUp(false);
     try {
@@ -57,7 +68,7 @@ const AddCertificate = () => {
   };
   return (
     <>
-    <div className="create-student student-table">
+      <div className="create-student student-table">
         <h1>Add New Certificate</h1>
         <form action="" onSubmit={handleSubmit}>
           <div>
@@ -69,6 +80,7 @@ const AddCertificate = () => {
               value={formData.title || ""}
               placeholder="Enter Your Title "
               onChange={handleChange}
+              onKeyDown={handleEnter}
               required
             />
           </div>
@@ -81,11 +93,12 @@ const AddCertificate = () => {
               value={formData.organization || ""}
               placeholder="Enter Your Organization "
               onChange={handleChange}
+              onKeyDown={handleEnter}
               required
             />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <button className="btn-view" type="button" onClick={() => save()}>
+            <button className="btn-view" type="button" onClick={() => save()} >
               Save
             </button>
             <button
@@ -100,7 +113,7 @@ const AddCertificate = () => {
         <Pop handleSubmit={handleSubmit} />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default AddCertificate;

@@ -1,5 +1,4 @@
 
-
 import React, { useContext, useEffect, useState } from "react";
 import "./About.css";
 import { Api } from "../../../Api/Api";
@@ -31,6 +30,11 @@ const About = () => {
         }
       })
       console.log(dltResponse.status)
+      if(dltResponse.ok){
+        const dltData = aboutTable.filter((item)=>item.id!==id)
+        setAboutTable(dltData);
+        localStorage.setItem("aboutTable", JSON.stringify(dltData));
+      }
     } catch (error) {
       console.log("Error is:" ,error);
     }
@@ -65,14 +69,14 @@ const About = () => {
           >
             Add New Data
           </button>
-
+        <div className="table-wrapper">
           <table>
             <thead>
               <tr>
                 <th>SN</th>
                 <th>Name</th>
                 <th>Profession</th>
-                <th>Description</th>
+                {/* <th>Description</th> */}
                 <th>Profile Image</th>
                 <th>Resume</th>
                 <th>Action</th>
@@ -84,7 +88,7 @@ const About = () => {
                   <td>{index+1}</td>
                   <td>{item.name}</td>
                   <td>{item.profession}</td>
-                  <td style={{maxWidth:"300px"}}>{item.description}</td>
+                  {/* <td style={{maxWidth:"300px"}}>{item.description}</td> */}
                   <td>
                     <img
                       src={item.profile_image}
@@ -102,7 +106,7 @@ const About = () => {
                     </a>
                   </td>
 
-                  <td>
+                  <td className="button">
                     <button
                       className="btn btn-view"
                       onClick={() => navigate(`/dashboard/viewAbout/${item.id}`)}
@@ -124,6 +128,7 @@ const About = () => {
             </tbody>
           </table>
           <Pop handleSubmit={()=>deleteData(selectedID)} />
+        </div>
         </div>
       </div>
     </>

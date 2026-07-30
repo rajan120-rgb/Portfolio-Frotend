@@ -1,23 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
+import { handleEnter } from "../utils/KeyboardNavigation";
+import { handleSave } from "../utils/handleSave";
+import Pop from "../Dashboard/PopUp/Pop";
 
 const SignUP = () => {
   const [signUpForm, setSignUpForm] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
   });
   // const [error, setError] = useState("");
-  const { closeLogin, setToken, token } = useContext(LoginContext);
+  const { closeLogin, setToken, token, setPopUp, popUp } =
+    useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleClose = () => {
     closeLogin();
     navigate("/login");
   };
-
   const handleChange = (e) => {
     setSignUpForm({
       ...signUpForm,
@@ -25,11 +29,17 @@ const SignUP = () => {
     });
   };
 
+
   const signUp = async (e) => {
     e.preventDefault();
+    console.log(token);
 
     if (!signUpForm.name.trim()) {
       toast.error("Name is required");
+      return;
+    }
+    if (!signUpForm.username.trim()) {
+      toast.error("Username is required");
       return;
     }
     if (!signUpForm.email.trim()) {
@@ -47,6 +57,8 @@ const SignUP = () => {
         method: "Post",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(signUpForm),
       });
@@ -55,28 +67,24 @@ const SignUP = () => {
 
       if (response.ok) {
         toast.success("Account Created Successfully");
-      } 
-    } catch (error) {
-      console.log("Server Error");
-    }
-    
         navigate("/login");
+      }
+    } catch (error) {
+      console.log("Server Error", error);
+    }
   };
 
   return (
     <>
       <div className="login-signup">
         <div className="loginsignup-container">
-          <button className="close-btn" onClick={handleClose}>✖</button>
+          <button className="close-btn" onClick={handleClose}>
+            ✖
+          </button>
 
           <h1>Sign Up</h1>
 
           <form className="loginsignup-field">
-            {/* <input 
-            type="text" 
-            placeholder="Your Name"
-          /> */}
-
             <input
               type="text"
               placeholder="Enter Your Name"
@@ -84,6 +92,16 @@ const SignUP = () => {
               required
               value={signUpForm.name}
               onChange={handleChange}
+              onKeyDown={handleEnter}
+            />
+            <input
+              type="text"
+              placeholder="Enter Your Username"
+              name="username"
+              required
+              value={signUpForm.username}
+              onChange={handleChange}
+              onKeyDown={handleEnter}
             />
 
             <input
@@ -93,6 +111,7 @@ const SignUP = () => {
               required
               value={signUpForm.email}
               onChange={handleChange}
+              onKeyDown={handleEnter}
             />
             <input
               type="password"
@@ -101,6 +120,7 @@ const SignUP = () => {
               required
               value={signUpForm.password}
               onChange={handleChange}
+              onKeyDown={handleEnter}
             />
 
             <button className="btn-continue" onClick={signUp}>

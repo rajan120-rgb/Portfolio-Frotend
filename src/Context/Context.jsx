@@ -8,7 +8,7 @@ export const LoginProvider = ({children}) => {
     const [showLogin, setShowLogin] = useState(true);
      const [loading, setLoading] = useState(true);
      const [token , setToken] = useState(
-         localStorage.getItem("token") || ""
+         sessionStorage.getItem("token") || ""
      )
     
 

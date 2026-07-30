@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "./Resume.css";
 import { Api } from "../../../Api/Api";
 import { LoginContext } from "../../../Context/Context";
+import { motion } from "framer-motion";
 
 const Resume = () => {
   const { token } = useContext(LoginContext);
@@ -51,7 +52,12 @@ const Resume = () => {
 
   return (
     <>
-      <div id="resume">
+      <motion.div
+      initial={{y:200,opacity:0, scale:0.9}}
+      whileInView={{y:0,opacity:1,scale:1}}
+      transition={{duration:0.9}}
+      viewport={{ once: true, amount: 0.1 }}
+       id="resume">
         <h1>My Resume</h1>
         <div className="resume-education resume-table">
           <h3>Education</h3>
@@ -112,7 +118,7 @@ const Resume = () => {
             <div>✓ Attention to Detail</div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

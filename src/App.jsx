@@ -71,9 +71,9 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={
-            // <PublicRoute>
+            <PublicRoute>
               <Home/>
-            // </PublicRoute>
+           </PublicRoute>
           } />
            <Route path="/login" element={
             <PublicRoute>
