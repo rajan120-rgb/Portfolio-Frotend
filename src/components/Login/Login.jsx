@@ -71,6 +71,7 @@ const save = (e)=>{
         setPopUp(false);
         setToken(data.token);
         sessionStorage.setItem("token", data.token);
+          localStorage.setItem("username", data.user.username);
 
         navigate("/dashboard");
         toast.success("Log in Successfully!");

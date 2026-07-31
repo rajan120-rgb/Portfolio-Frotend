@@ -20,34 +20,41 @@ const About = () => {
    setSelectedID(id);
   };
 
-  const deleteData =async (id) =>{
-     setPopUp(false);
-    try {
-      const dltResponse = await fetch(`http://localhost:8000/api/admin/about/${id}`,{
-        method: "DELETE",
-        headers:{
-           Authorization: `Bearer ${token}`,
-        }
-      })
-      console.log(dltResponse.status)
-      if(dltResponse.ok){
-        const dltData = aboutTable.filter((item)=>item.id!==id)
-        setAboutTable(dltData);
-        localStorage.setItem("aboutTable", JSON.stringify(dltData));
-      }
-    } catch (error) {
-      console.log("Error is:" ,error);
-    }
-  }
+  // const deleteData =async (id) =>{
+  //    setPopUp(false);
+  //   try {
+  //     const dltResponse = await fetch(`http://localhost:8000/api/admin/about/${id}`,{
+  //       method: "DELETE",
+  //       headers:{
+  //          Authorization: `Bearer ${token}`,
+  //       }
+  //     })
+  //     console.log(dltResponse.status)
+  //     if(dltResponse.ok){
+  //       const dltData = aboutTable.filter((item)=>item.id!==id)
+  //       setAboutTable(dltData);
+  //       localStorage.setItem("aboutTable", JSON.stringify(dltData));
+  //     }
+  //   } catch (error) {
+  //     console.log("Error is:" ,error);
+  //   }
+  // }
 
   useEffect(() => {
     const table = async () => {
+      console.log("Token:", token);
       try {
-        const response = await Api("/public/about");
-        console.log(response);
-        console.log(response.data);
-        if (response.success) {
-          const data = response.data;
+        const response = await fetch("http://localhost:8000/api/admin/about",{
+           headers: {
+             Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        }
+        })
+        const result = await response.json();
+        console.log(result);
+        console.log(result.data);
+        if (result.success) {
+          const data = result.data;
           setAboutTable(data);
           localStorage.setItem("aboutTable", JSON.stringify(data));
         }
@@ -73,7 +80,7 @@ const About = () => {
           <table>
             <thead>
               <tr>
-                <th>SN</th>
+                {/* <th>SN</th> */}
                 <th>Name</th>
                 <th>Profession</th>
                 {/* <th>Description</th> */}
@@ -83,22 +90,22 @@ const About = () => {
               </tr>
             </thead>
             <tbody>
-              {aboutTable.map((item, index) => (
-                <tr key={index}>
-                  <td>{index+1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.profession}</td>
+              {/* {aboutTable?.map((item, index) => ( */}
+                <tr>
+                  {/* <td>{index+1}</td> */}
+                  <td>{aboutTable?.name}</td>
+                  <td>{aboutTable?.profession}</td>
                   {/* <td style={{maxWidth:"300px"}}>{item.description}</td> */}
                   <td>
                     <img
-                      src={item.profile_image}
-                      alt={item.name}
+                      src={aboutTable?.profile_image}
+                      alt={aboutTable?.name}
                       className="profile-img"
                     />
                   </td>
                   <td>
                     <a
-                      href={item.resume}
+                      href={aboutTable?.resume}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -109,22 +116,22 @@ const About = () => {
                   <td className="button">
                     <button
                       className="btn btn-view"
-                      onClick={() => navigate(`/dashboard/viewAbout/${item.id}`)}
+                      onClick={() => navigate(`/dashboard/viewAbout/${aboutTable.id}`)}
                     >
                       View
                     </button>
 
                     <button
                       className="btn btn-edit"
-                      onClick={() => navigate(`/dashboard/editAbout/${item.id}`)}
+                      onClick={() => navigate(`/dashboard/editAbout/${aboutTable.id}`)}
                     >
                       Edit
                     </button>
 
-                    <button className="btn btn-dlt"  onClick={()=>save(item.id)}>Delete</button>
+                    <button className="btn btn-dlt"  onClick={()=>save(aboutTable.id)}>Delete</button>
                   </td>
                 </tr>
-              ))}
+              {/* ))} */}
             </tbody>
           </table>
           <Pop handleSubmit={()=>deleteData(selectedID)} />
