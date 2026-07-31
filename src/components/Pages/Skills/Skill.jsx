@@ -46,10 +46,10 @@ const [skill, setSkill] = useState(()=>{
   return (
     <>
       <motion.div
-      initial={{y:200,opacity:0, scale:0.9}}
-      whileInView={{y:0,opacity:1,scale:1}}
-      transition={{duration:0.9}}
-      viewport={{ once: true, amount: 0.1 }}
+      // initial={{y:200,opacity:0, scale:0.9}}
+      // whileInView={{y:0,opacity:1,scale:1}}
+      // transition={{duration:0.9}}
+      // viewport={{ once: true, amount: 0.1 }}
        id="skills">
         <div className="skill-description">
           <h1>My Skills</h1>

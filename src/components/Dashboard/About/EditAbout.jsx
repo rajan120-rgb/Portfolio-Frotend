@@ -126,7 +126,7 @@ const EditAbout = () => {
         <h1>Edit About</h1>
         <form action="" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="id">ID:</label>
+            <label htmlFor="id">Image:</label>
             <input
               className="file"
               type="file"
@@ -139,7 +139,7 @@ const EditAbout = () => {
             />
           </div>
           <div>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">Resume:</label>
             <input
               className="file"
               type="file"
@@ -152,7 +152,7 @@ const EditAbout = () => {
             />
           </div>
           <div>
-            <label htmlFor="place">Place:</label>
+            <label htmlFor="place">Name:</label>
             <input
               type="text"
               name="name"
@@ -162,7 +162,7 @@ const EditAbout = () => {
             />
           </div>
           <div>
-            <label htmlFor="phone">Phone:</label>
+            <label htmlFor="phone">Profession:</label>
             <input
               type="text"
               name="profession"

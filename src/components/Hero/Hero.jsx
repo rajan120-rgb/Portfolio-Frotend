@@ -10,8 +10,8 @@ import { easeIn, motion } from "framer-motion";
 //  import {  toast } from 'react-toastify';
 
 const Hero = ({ hero }) => {
-  console.log(hero.name);
-  console.log(hero.resume);
+  console.log(hero?.name);
+  console.log(hero?.resume);
   const onclick = () => {
     Swal.fire({
       title: "Download Resume?",
@@ -50,7 +50,7 @@ const Hero = ({ hero }) => {
       }
     });
   };
-
+console.log(hero)
   // console.log(hero.profile_image);
 
   return (
@@ -58,22 +58,22 @@ const Hero = ({ hero }) => {
       <div className="hero">
         <div className="hero-left">
           <motion.div
-            initial={{ opacity: 0, x: -100, scale: 0.8 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.6 }}
+            // initial={{ opacity: 0, x: -100, scale: 0.8 }}
+            // animate={{ opacity: 1, x: 0, scale: 1 }}
+            // transition={{ duration: 0.6 }}
             className="hero-main-profile"
           >
-            <img src={hero.profile_image} alt="Profile" />
+            <img src={hero?.profile_image} alt="Profile" />
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 100, scale: 0.8 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.6, ease: easeIn }}
+            // initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            // animate={{ opacity: 1, x: 0, scale: 1 }}
+            // transition={{ duration: 0.6, ease: easeIn }}
             className="hero-intro"
           >
             <div className="hero-intro-hellow">
               <h1>
-                Hey , I am {hero.name}{" "}
+                Hey , I am {hero?.name}{" "}
                 <span>
                   {hero && hero.profession && (
                     <Typewriter
@@ -95,7 +95,7 @@ const Hero = ({ hero }) => {
               </h1>
             </div>
             <p>
-              {hero.description}
+              {hero?.description}
               {/* I am a Frontend Developer focused on transforming ideas into
               interactive, responsive, and high-performance web experiences. I
               specialize in building clean UI designs, reusable components, and
@@ -110,7 +110,7 @@ const Hero = ({ hero }) => {
                 duration={500}
               >
                 <button>
-                  <span></span>Hire Me{" "}
+                  <span></span>Hire Me
                 </button>
               </Link>
 

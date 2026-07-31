@@ -10,28 +10,23 @@ import Footer from "../Footer/Footer.jsx";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/Context.jsx";
 import { Api } from "../../Api/Api";
+import { AwardIcon } from "lucide-react";
 
 const Home = () => {
   const { setLoading, loading, token } = useContext(LoginContext);
   const [about, setAbout] = useState(() => {
     const saved = localStorage.getItem("savedData");
-    return saved ? JSON.parse(saved) : "";
+    return saved ? JSON.parse(saved) : null;
   });
-  
-
+   const username = localStorage.getItem("username");
   useEffect(() => {
-    // if(about){
-    //   setLoading(false)
-    //   return
-    // }
     const getAbout = async () => {
       try {
-        const data = await Api("/public/about");
-        console.log(data);
+        const data = await Api(`/public/${username}`);
+        console.log(data.data.about);
         if (data.success) {
-          const latestAbout = data.data[data.data.length - 1];
-          setAbout(latestAbout);
-          localStorage.setItem("savedData", JSON.stringify(latestAbout));
+          setAbout(data.data.about);
+          localStorage.setItem("savedData", JSON.stringify(data.data.about));
         }
       } catch (error) {
         console.log(error);
@@ -54,14 +49,14 @@ const Home = () => {
           </div>
         </div>
       ) : ( */}
-        <>
-          <Navbar />
-          <About data={about} />
-          <Skill />
-          <Resume />
-          <Contact />
-          <Footer />
-        </>
+      <>
+        <Navbar />
+        <About data={about} />
+        <Skill />
+        <Resume />
+        <Contact />
+        <Footer />
+      </>
       {/* )} */}
     </div>
   );
