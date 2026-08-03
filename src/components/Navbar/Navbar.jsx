@@ -74,7 +74,7 @@ const Navbar = () => {
               duration={500}
               className="nav-link"
             >
-              Resume
+              Certificate
             </Link>
           </li>
           <li>
@@ -145,7 +145,7 @@ const Navbar = () => {
                   className="nav-link"
                   onClick={() => setMenu(!menu)}
                 >
-                  Resume
+                  Certificate
                 </Link>
               </li>
               <li>
