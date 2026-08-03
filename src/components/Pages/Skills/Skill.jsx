@@ -5,53 +5,100 @@ import { LoginContext } from "../../../Context/Context";
 import { motion } from "framer-motion";
 
 const Skill = () => {
-  const { token } = useContext(LoginContext)
-const [skill, setSkill] = useState(()=>{
-  const saved = localStorage.getItem("skill");
-  return saved? JSON.parse(saved):[];
-})
+  const { token } = useContext(LoginContext);
+  const [skill, setSkill] = useState(() => {
+    const saved = localStorage.getItem("skill");
+    return saved ? JSON.parse(saved) : [];
+  });
 
+  useEffect(() => {
+    const getSkill = async () => {
+      try {
+        const data = await Api("/public/skills");
 
-    useEffect(() => {
-       const getSkill = async () => {
-         try {
-           const data = await Api("/public/skills");
-   
-           console.log(data);
-   
-           if (data.success) {
-             setSkill(data.data);
-             localStorage.setItem("skill",JSON.stringify(data.data))
-           }
-         } catch (error) {
-           console.log(error);
-         } 
-       };
-   
-       getSkill();
-     }, []);
+        console.log(data);
 
-     skill.forEach((item) => console.log(item.icon));
-    //  console.log(sk)
+        if (data.success) {
+          setSkill(data.data);
+          localStorage.setItem("skill", JSON.stringify(data.data));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  // const skills = [
-  //   { name: "HTML", level: 90 },
-  //   { name: "CSS", level: 85 },
-  //   { name: "JavaScript", level: 75 },
-  //   { name: "React", level: 70 },
-  //   { name: "UI Design", level: 75 },
-  //   { name: "Figma", level: 75 },
-  // ];
+    getSkill();
+  }, []);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const fadeUp = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const iconVariant = {
+    hidden: {
+      opacity: 0,
+      scale: 0.4,
+      rotate: -180,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
+  const skillVariant = {
+    hidden: (index) => ({
+      opacity: 0,
+      x: index % 2 === 0 ? -80 : 80,
+    }),
+
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
 
   return (
     <>
       <motion.div
-      // initial={{y:200,opacity:0, scale:0.9}}
-      // whileInView={{y:0,opacity:1,scale:1}}
-      // transition={{duration:0.9}}
-      // viewport={{ once: true, amount: 0.1 }}
-       id="skills">
-        <div className="skill-description">
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
+        id="skills"
+      >
+        <motion.div variants={fadeUp} className="skill-description">
           <h1>My Skills</h1>
           <p>
             I am an enthusiastic learner with a strong foundation in
@@ -59,33 +106,83 @@ const [skill, setSkill] = useState(()=>{
             skills, adapting to challenges, and contributing positively to
             projects while continuously improving my knowledge.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="skill-icon">
-          {skill.map((icon, index)=>(
-             <i className={icon.icon} key={index}></i>
+        <motion.div variants={containerVariants} className="skill-icon">
+          {skill.map((icon, index) => (
+            <motion.i
+              variants={iconVariant}
+              whileHover={{
+                scale: 1.25,
+                rotate: 10,
+                y: -8,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 250,
+              }}
+              className={icon.icon}
+              key={index}
+            ></motion.i>
           ))}
-        </div>
-        {/* <div className="skill-icon">
-          <i className={skill.icon}></i>
-          <i className="fa-brands fa-css"></i>
-          <i className="fa-brands fa-js"></i>
-          <i className="fa-brands fa-react"></i>
-        </div> */}
+        </motion.div>
         <div className="skill-level">
           {skill.map((skill, index) => (
-            
-             <div className="skill-level-content" key={index}>
-             <div className="skill-side">
-               <h3>{skill.name}</h3>
-              <div className="skill-level-percent">{skill.percentage}%</div>
-             </div>
-              <div className="skill-level-percent-bar">
-                <div className="progress" style={{ width: `${skill.percentage}%` }}> <span className="thumb"></span></div>
+            <motion.div
+              custom={index}
+              variants={skillVariant}
+              whileHover={{
+                y: -8,
+                scale: 1.02,
+              }}
+              className="skill-level-content"
+              key={index}
+            >
+              <div className="skill-side">
+                <h3>{skill.name}</h3>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    y: -10,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: false,
+                  }}
+                  transition={{
+                    delay: 0.5,
+                  }}
+                  className="skill-level-percent"
+                >
+                  {skill.percentage}%
+                </motion.div>
               </div>
-            </div>
-            
-           
+              <div className="skill-level-percent-bar">
+                <motion.div
+                  initial={{
+                    width: 0,
+                  }}
+                  whileInView={{
+                    width: `${skill.percentage}%`,
+                  }}
+                  viewport={{
+                    once: false,
+                  }}
+                  transition={{
+                    duration: 1.4,
+                    ease: "easeOut",
+                  }}
+                  className="progress"
+                  // style={{ width: `${skill.percentage}%` }}
+                >
+                  {" "}
+                  <span className="thumb"></span>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>

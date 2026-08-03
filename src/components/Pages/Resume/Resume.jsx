@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 
 const Resume = () => {
   const { token } = useContext(LoginContext);
-  const [resume, setResume] = useState(()=>{
+  const [resume, setResume] = useState(() => {
     const saved1 = localStorage.getItem("resume");
-    return saved1? JSON.parse(saved1):[];
+    return saved1 ? JSON.parse(saved1) : [];
   });
-  const [certificate, setCertificate] = useState(()=>{
+  const [certificate, setCertificate] = useState(() => {
     const saved = localStorage.getItem("certificate");
-    return saved? JSON.parse(saved):[];
+    return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Resume = () => {
 
         if (data.success) {
           setResume(data.data);
-          localStorage.setItem("resume", JSON.stringify(data.data))
+          localStorage.setItem("resume", JSON.stringify(data.data));
         }
       } catch (error) {
         console.log(error);
@@ -41,7 +41,7 @@ const Resume = () => {
         console.log(data);
         if (data.success) {
           setCertificate(data.data);
-          localStorage.setItem("certificate",JSON.stringify(data.data))
+          localStorage.setItem("certificate", JSON.stringify(data.data));
         }
       } catch (error) {
         console.log(error);
@@ -50,15 +50,78 @@ const Resume = () => {
     getResumeData();
   }, []);
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const headingVariant = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const cardVariant = {
+    hidden: (index) => ({
+      opacity: 0,
+      x: index % 2 === 0 ? -80 : 80,
+      scale: 0.9,
+    }),
+
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const strengthVariant = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+      scale: 0.9,
+    },
+
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <>
       <motion.div
-      // initial={{y:200,opacity:0, scale:0.9}}
-      // whileInView={{y:0,opacity:1,scale:1}}
-      // transition={{duration:0.9}}
-      // viewport={{ once: true, amount: 0.1 }}
-       id="resume">
-        <h1>My Resume</h1>
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
+        id="resume"
+      >
+        {/* <h1>My Resume</h1>
         <div className="resume-education resume-table">
           <h3>Education</h3>
           <div className="resume-education-table">
@@ -91,32 +154,95 @@ const Resume = () => {
               ))}
             </table>
           </div>
-        </div>
+        </div> */}
         <div className=" resume-education">
-          <h3 className="certificate">Certification</h3>
+          <motion.h3 variants={headingVariant} className="certificate">
+            Certification
+          </motion.h3>
           <div className="resume-certification">
             {certificate.map((item, index) => (
-              <div key={index}>
+              <motion.div
+                key={index}
+                custom={index}
+                variants={cardVariant}
+                whileHover={{
+                  y: -10,
+                  scale: 1.03,
+                  rotateX: 3,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 220,
+                }}
+              >
                 <div className="resume-box">
                   <h4> {item.title}</h4>
                   <p>{item.organization}</p>
                   {/* <p> Learned component-based development,
               hooks, and modern React concepts.</p> */}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
         <div className="resume-strength resume-education">
-          <h3>Strength</h3>
-          <div className="strength-grid">
-            <div>✓ Problem Solving</div>
-            <div>✓ Quick Learning</div>
-            <div>✓ Responsive Design</div>
-            <div>✓ Clean Coding Practices</div>
-            <div>✓ Team Collaboration</div>
-            <div>✓ Attention to Detail</div>
-          </div>
+          <motion.h3 variants={headingVariant}>Strength</motion.h3>
+          <motion.div variants={containerVariants} className="strength-grid">
+            <motion.div
+              variants={strengthVariant}
+              whileHover={{
+                scale: 1.05,
+                x: 8,
+              }}
+            >
+              ✓ Problem Solving
+            </motion.div>
+            <motion.div
+              variants={strengthVariant}
+              whileHover={{
+                scale: 1.05,
+                x: 8,
+              }}
+            >
+              ✓ Quick Learning
+            </motion.div>
+            <motion.div
+              variants={strengthVariant}
+              whileHover={{
+                scale: 1.05,
+                x: 8,
+              }}
+            >
+              ✓ Responsive Design
+            </motion.div>
+            <motion.div
+              variants={strengthVariant}
+              whileHover={{
+                scale: 1.05,
+                x: 8,
+              }}
+            >
+              ✓ Clean Coding Practices
+            </motion.div>
+            <motion.div
+              variants={strengthVariant}
+              whileHover={{
+                scale: 1.05,
+                x: 8,
+              }}
+            >
+              ✓ Team Collaboration
+            </motion.div>
+            <motion.div
+              variants={strengthVariant}
+              whileHover={{
+                scale: 1.05,
+                x: 8,
+              }}
+            >
+              ✓ Attention to Detail
+            </motion.div>
+          </motion.div>
         </div>
       </motion.div>
     </>
