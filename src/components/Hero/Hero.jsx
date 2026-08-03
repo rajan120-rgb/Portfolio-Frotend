@@ -50,28 +50,99 @@ const Hero = ({ hero }) => {
       }
     });
   };
-console.log(hero)
+  console.log(hero);
   // console.log(hero.profile_image);
+
+  // animation
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const imageVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      x: -80,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      x: 0,
+      transition: {
+        duration: 0.9,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
     <>
       <div className="hero">
-        <div className="hero-left">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: false,
+            amount: 0.3,
+          }}
+          className="hero-left"
+        >
           <motion.div
-            // initial={{ opacity: 0, x: -100, scale: 0.8 }}
-            // animate={{ opacity: 1, x: 0, scale: 1 }}
-            // transition={{ duration: 0.6 }}
+            variants={imageVariants}
+            whileHover={{
+              scale: 1.04,
+              rotate: 1,
+            }}
             className="hero-main-profile"
           >
-            <img src={hero?.profile_image} alt="Profile" />
+            <motion.img
+              animate={{
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              src={hero?.profile_image}
+              alt="Profile"
+            />
           </motion.div>
           <motion.div
-            // initial={{ opacity: 0, x: 100, scale: 0.8 }}
-            // animate={{ opacity: 1, x: 0, scale: 1 }}
-            // transition={{ duration: 0.6, ease: easeIn }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: false,
+              amount: 0.3,
+            }}
             className="hero-intro"
           >
-            <div className="hero-intro-hellow">
+            <motion.div
+              variants={itemVariants}
+              className="hero-intro-hellow"
+            >
               <h1>
                 Hey , I am {hero?.name}{" "}
                 <span>
@@ -93,15 +164,15 @@ console.log(hero)
                   )}
                 </span>
               </h1>
-            </div>
-            <p>
+            </motion.div>
+            <motion.p variants={itemVariants}>
               {hero?.description}
               {/* I am a Frontend Developer focused on transforming ideas into
               interactive, responsive, and high-performance web experiences. I
               specialize in building clean UI designs, reusable components, and
               seamless user experiences using modern web technologies. */}
-            </p>
-            <div className="btn">
+            </motion.p>
+            <motion.div variants={itemVariants} className="btn">
               <Link
                 to="contacts"
                 spy={true}
@@ -117,8 +188,8 @@ console.log(hero)
               <button onClick={onclick} className="btn-transparent">
                 Download Cv
               </button>
-            </div>
-            <div className="hero-experience">
+            </motion.div>
+            <motion.div variants={itemVariants} className="hero-experience">
               <div className="five">
                 <p>
                   <span>1+</span>
@@ -142,9 +213,9 @@ console.log(hero)
                   Happy Clients
                 </p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

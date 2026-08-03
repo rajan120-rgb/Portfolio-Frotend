@@ -44,27 +44,109 @@ const Contact = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const containerVariant = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.18,
+      },
+    },
+  };
+
+  const fadeDown = {
+    hidden: {
+      opacity: 0,
+      y: -40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const fadeUp = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const leftVariant = {
+    hidden: {
+      opacity: 0,
+      x: -80,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const rightVariant = {
+    hidden: {
+      opacity: 0,
+      x: 80,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
   return (
     <>
       <section id="contacts">
         <motion.div
-          initial={{ y: 200, opacity: 0, scale:0.9 }}
-          whileInView={{ y: 0, opacity: 1,scale:1 }}
-          transition={{ duration: 0.9 }}
-          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: false,
+            amount: 0.2,
+          }}
           id="contactPage"
         >
-          <h1 className="contactPageTitle">Contact Me</h1>
-          <p className="contact-description">
+          <motion.h1 variants={fadeDown} className="contactPageTitle">
+            Contact Me
+          </motion.h1>
+          <motion.p variants={fadeUp} className="contact-description">
             Please fill out the form below to discuss any work opportunities.
-          </p>
-          <form
+          </motion.p>
+          <motion.form
             ref={form}
             className="contactForms"
             action=""
             onSubmit={sendMail}
+            variants={containerVariant}
           >
-            <input
+            <motion.input
+              variants={leftVariant}
+              whileHover={{
+                y: -3,
+              }}
+              whileFocus={{
+                scale: 1.02,
+              }}
               type="text"
               placeholder="Your Name"
               className="name"
@@ -73,7 +155,14 @@ const Contact = () => {
               onChange={handleChange}
               required
             />
-            <input
+            <motion.input
+              variants={rightVariant}
+              whileHover={{
+                y: -3,
+              }}
+              whileFocus={{
+                scale: 1.02,
+              }}
               type="email"
               placeholder="your Email"
               className="email"
@@ -82,7 +171,11 @@ const Contact = () => {
               onChange={handleChange}
               required
             />
-            <textarea
+            <motion.textarea
+              variants={fadeUp}
+              whileHover={{
+                y: -3,
+              }}
               className="msg "
               name="message"
               rows={5}
@@ -91,17 +184,29 @@ const Contact = () => {
               value={value.message}
               onChange={handleChange}
               required
-            ></textarea>
-            <button type="submit" value="send" className="submitBtn">
+            ></motion.textarea>
+            <motion.button
+              variants={fadeUp}
+              whileHover={{
+                scale: 1.05,
+                y: -4,
+              }}
+              whileTap={{
+                scale: 0.95,
+              }}
+              type="submit"
+              value="send"
+              className="submitBtn"
+            >
               Submit
-            </button>
+            </motion.button>
             {/* <div className="links">
               <img src={FacebookIcon} alt="" className="linkImg" />
               <img src={TwitterIcon} alt="" className="linkImg" />
               <img src={YoutubeIcon} alt="" className="linkImg" />
               <img src={InstagramIcon} alt="" className="linkImg" />
             </div> */}
-          </form>
+          </motion.form>
         </motion.div>
       </section>
     </>
