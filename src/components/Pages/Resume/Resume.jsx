@@ -178,8 +178,6 @@ const Resume = () => {
                 <div className="resume-box">
                   <h4> {item.title}</h4>
                   <p>{item.organization}</p>
-                  {/* <p> Learned component-based development,
-              hooks, and modern React concepts.</p> */}
                 </div>
               </motion.div>
             ))}
@@ -192,7 +190,7 @@ const Resume = () => {
               variants={strengthVariant}
               whileHover={{
                 scale: 1.05,
-                x: 8,
+                // x: 2,
               }}
             >
               ✓ Problem Solving
@@ -201,7 +199,7 @@ const Resume = () => {
               variants={strengthVariant}
               whileHover={{
                 scale: 1.05,
-                x: 8,
+                // x: 2,
               }}
             >
               ✓ Quick Learning
@@ -210,7 +208,7 @@ const Resume = () => {
               variants={strengthVariant}
               whileHover={{
                 scale: 1.05,
-                x: 8,
+                // x: 2,
               }}
             >
               ✓ Responsive Design
@@ -219,7 +217,7 @@ const Resume = () => {
               variants={strengthVariant}
               whileHover={{
                 scale: 1.05,
-                x: 8,
+                // x: 2,
               }}
             >
               ✓ Clean Coding Practices
@@ -228,7 +226,7 @@ const Resume = () => {
               variants={strengthVariant}
               whileHover={{
                 scale: 1.05,
-                x: 8,
+                // x: 2,
               }}
             >
               ✓ Team Collaboration
@@ -237,7 +235,7 @@ const Resume = () => {
               variants={strengthVariant}
               whileHover={{
                 scale: 1.05,
-                x: 8,
+                // x: 2,
               }}
             >
               ✓ Attention to Detail
