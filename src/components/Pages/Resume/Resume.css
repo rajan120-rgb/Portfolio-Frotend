@@ -65,9 +65,6 @@ thead th {
   font-weight: 500;
   transition: 0.3s;
 }
-.resume-certification .resume-box:hover {
-  scale: 1.1;
-}
 .resume-box h4 {
   /* color:  rgb(109, 109, 246); */
   color: rgb(213, 197, 197);
