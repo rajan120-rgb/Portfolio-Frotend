@@ -123,7 +123,7 @@ const AddSkill = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit}/>
+        <Pop save={"Save"} update={"Do you want to save it?"} handleSubmit={handleSubmit}/>
       </div>
     </div>
   )

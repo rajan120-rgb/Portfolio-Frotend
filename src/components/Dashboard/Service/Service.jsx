@@ -28,6 +28,11 @@ const Service = () => {
         }
       })
       console.log(dltResponse.status)
+      if(dltResponse.ok){
+        const dltData = serviceTable.filter((item)=>item.id!==id)
+       setServiceTable(dltData);
+     localStorage.setItem("serviceTable", JSON.stringify(dltData));
+      }
     } catch (error) {
       console.log("Error is:" ,error);
     }
@@ -78,12 +83,12 @@ const Service = () => {
                   <td>{item.title}</td>
                   <td style={{ maxWidth: "300px" }}>{item.description}</td>
                   <td>
-                    <button
+                    {/* <button
                       className="btn btn-view"
                       onClick={() => navigate(`/dashboard/viewService/${item.id}`)}
                     >
                       View
-                    </button>
+                    </button> */}
 
                     <button
                       className="btn btn-edit"
@@ -98,7 +103,7 @@ const Service = () => {
               ))}
             </tbody>
           </table>
-          <Pop handleSubmit={()=>deleteData(selectedID)} />
+          <Pop save={"Delete"} update={"Do you want to delete it?"} handleSubmit={()=>deleteData(selectedID)} />
         </div>
       </div>
     </>

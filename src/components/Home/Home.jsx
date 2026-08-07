@@ -18,15 +18,17 @@ const Home = () => {
     const saved = localStorage.getItem("savedData");
     return saved ? JSON.parse(saved) : null;
   });
-   const username = localStorage.getItem("username");
+  const username = localStorage.getItem("username");
+
   useEffect(() => {
     const getAbout = async () => {
       try {
         const data = await Api(`/public/${username}`);
         console.log(data.data.about);
         if (data.success) {
-          setAbout(data.data.about);
-          localStorage.setItem("savedData", JSON.stringify(data.data.about));
+          const aboutData = { ...data.data.about };
+          setAbout(aboutData);
+          localStorage.setItem("savedData", JSON.stringify(aboutData));
         }
       } catch (error) {
         console.log(error);
@@ -50,7 +52,7 @@ const Home = () => {
         </div>
       ) : ( */}
       <>
-        <Navbar />
+        <Navbar data={about}/>
         <About data={about} />
         <Skill />
         <Resume />

@@ -74,6 +74,7 @@ const EditService = () => {
           <div>
             <label htmlFor="title">Title:</label>
             <input
+            className="text-black"
               type="text"
               id="title"
               name="title"
@@ -85,15 +86,15 @@ const EditService = () => {
           </div>
           <div>
             <label htmlFor="description">Description:</label>
-            <input
+                <textarea
+              className="text-black min-h-30"
+              id=""
               type="text"
-              id="description"
               name="description"
               value={formData.description || ""}
               placeholder="Enter Your Description "
               onChange={handleChange}
-              required
-            />
+            ></textarea>
           </div>
 
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -109,7 +110,7 @@ const EditService = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit}/>
+        <Pop save={"Update"} update={"Do you want to update it?"} handleSubmit={handleSubmit}/>
       </div>
     </>
   );

@@ -17,20 +17,28 @@ const Skill = () => {
     setSelectedID(id);
   };
 
-    const deleteData =async (id) =>{
-       setPopUp(false);
-      try {
-        const dltResponse = await fetch(`http://localhost:8000/api/admin/skills/${id}`,{
+  const deleteData = async (id) => {
+    setPopUp(false);
+    try {
+      const dltResponse = await fetch(
+        `http://localhost:8000/api/admin/skills/${id}`,
+        {
           method: "DELETE",
-          headers:{
-             Authorization: `Bearer ${token}`,
-          }
-        })
-        console.log(dltResponse.status)
-      } catch (error) {
-        console.log("Error is:" ,error);
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      console.log(dltResponse.status);
+      if (dltResponse.ok) {
+        const dltData = skillTable.filter((item) => item.id !== id);
+        setSkillTable(dltData);
+        localStorage.setItem("skillTable", JSON.stringify(dltData));
       }
+    } catch (error) {
+      console.log("Error is:", error);
     }
+  };
 
   useEffect(() => {
     const table = async () => {
@@ -72,34 +80,43 @@ const Skill = () => {
               </tr>
             </thead>
             <tbody>
-              {skillTable.map((item, index) => (
-              <tr key={index}>
-                <td>{index+1}</td>
-                <td>{item.name}</td>
-                <td>{item.percentage}</td>
-                <td style={{ maxWidth: "300px" }}>{item.icon}</td>
-                <td>
-                  <button
-                    className="btn btn-view"
-                    onClick={() => navigate(`/dashboard/viewSkill/${item.id}`)}
-                  >
-                    View
-                  </button>
+              {skillTable?.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.name}</td>
+                  <td>{item.percentage}</td>
+                  <td style={{ maxWidth: "300px" }}>{item.icon}</td>
+                  <td>
+                    {/* <button
+                      className="btn btn-view"
+                      onClick={() =>
+                        navigate(`/dashboard/viewSkill/${item.id}`)
+                      }
+                    >
+                      View
+                    </button> */}
 
-                  <button
-                    className="btn btn-edit"
-                    onClick={() => navigate(`/dashboard/editSkill/${item.id}`)}
-                  >
-                    Edit
-                  </button>
+                    <button
+                      className="btn btn-edit"
+                      onClick={() =>
+                        navigate(`/dashboard/editSkill/${item.id}`)
+                      }
+                    >
+                      Edit
+                    </button>
 
-                  <button className="btn btn-dlt" onClick={()=>save(item.id)}>Delete</button>
-                </td>
-              </tr>
-               ))} 
+                    <button
+                      className="btn btn-dlt"
+                      onClick={() => save(item.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-          <Pop handleSubmit={()=>deleteData(selectedID)} />
+          <Pop save={"Delete"} update={"Do you want to Delete it?"} handleSubmit={() => deleteData(selectedID)} />
         </div>
       </div>
     </>

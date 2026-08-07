@@ -76,6 +76,7 @@ const EditSkill = () => {
           <div>
             <label htmlFor="language">Language:</label>
             <input
+            className="text-black"
               type="text"
               id="language"
               name="name"
@@ -88,6 +89,7 @@ const EditSkill = () => {
           <div>
             <label htmlFor="description">Percentage:</label>
             <input
+            className="text-black"
               type="number"
               id="description"
               name="description"
@@ -100,6 +102,7 @@ const EditSkill = () => {
           <div>
             <label htmlFor="description">Icon:</label>
             <input
+            className="text-black"
               type="text"
               id="description"
               name="icon"
@@ -123,7 +126,7 @@ const EditSkill = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit} />
+        <Pop save={"Update"} update={"Do you want to update it?"} handleSubmit={handleSubmit} />
       </div>
     </>
   );

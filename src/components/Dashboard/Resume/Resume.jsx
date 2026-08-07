@@ -32,6 +32,11 @@ const Resume = () => {
         },
       );
       console.log(dltResponse.status);
+      if (dltResponse.ok) {
+        const dltData = resumeTable.filter((item) => item.id !== id);
+        setResumeTable(dltData);
+        localStorage.setItem("resumeTable", JSON.stringify(dltData));
+      }
     } catch (error) {
       console.log("Error is:", error);
     }
@@ -81,21 +86,21 @@ const Resume = () => {
             <tbody>
               {resumeTable.map((item, index) => (
                 <tr key={index}>
-                  <td>{index+1}</td>
+                  <td>{index + 1}</td>
                   <td>{item.institution_name}</td>
                   <td>{item.start_year}</td>
                   <td style={{ maxWidth: "300px" }}>{item.degree}</td>
-                   <td>{item.field_of_study}</td>
-                   <td>{item.gpa}</td>
+                  <td>{item.field_of_study}</td>
+                  <td>{item.gpa}</td>
                   <td>
-                    <button
+                    {/* <button
                       className="btn btn-view"
                       onClick={() =>
                         navigate(`/dashboard/viewResume/${item.id}`)
                       }
                     >
                       View
-                    </button>
+                    </button> */}
 
                     <button
                       className="btn btn-edit"
@@ -117,7 +122,7 @@ const Resume = () => {
               ))}
             </tbody>
           </table>
-          <Pop handleSubmit={() => deleteData(selectedID)} />
+          <Pop save={"Delete"} update={"Do you want to delete it?"} handleSubmit={() => deleteData(selectedID)} />
         </div>
       </div>
     </>

@@ -86,14 +86,14 @@ const Certificate = () => {
                   <td>{item.title}</td>
                   <td>{item.organization}</td>
                   <td>
-                    <button
+                    {/* <button
                       className="btn btn-view"
                       onClick={() =>
                         navigate(`/dashboard/viewCertificate/${item.id}`)
                       }
                     >
                       View
-                    </button>
+                    </button> */}
 
                     <button
                       className="btn btn-edit"
