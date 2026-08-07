@@ -36,7 +36,7 @@
   font-size: 3rem;
   font-weight: 800;
   width: 46vw;
-  height: 7rem;
+  min-height: 7rem;
 }
 .hero-intro-hellow span {
   color: rgb(109, 109, 246);
