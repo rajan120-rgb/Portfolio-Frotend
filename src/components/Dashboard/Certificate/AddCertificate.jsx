@@ -74,6 +74,7 @@ const AddCertificate = () => {
           <div>
             <label htmlFor="title">Title:</label>
             <input
+            className="text-black"
               type="text"
               id="title"
               name="title"
@@ -87,6 +88,7 @@ const AddCertificate = () => {
           <div>
             <label htmlFor="description">Organization:</label>
             <input
+            className="text-black"
               type="text"
               id="description"
               name="organization"
@@ -110,7 +112,7 @@ const AddCertificate = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit} />
+        <Pop save={"Save"} update={"Do you want to save it?"} handleSubmit={handleSubmit} />
       </div>
     </>
   );

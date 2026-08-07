@@ -82,14 +82,14 @@ const Hero = ({ hero }) => {
     hidden: {
       opacity: 0,
       scale: 0.8,
-      x: -80,
+      x: -20,
     },
     visible: {
       opacity: 1,
       scale: 1,
       x: 0,
       transition: {
-        duration: 0.9,
+        duration: 0.3,
         ease: "easeOut",
       },
     },
@@ -110,16 +110,16 @@ const Hero = ({ hero }) => {
         >
           <motion.div
             variants={imageVariants}
-            whileHover={{
-              scale: 1.04,
-              rotate: 1,
-            }}
+            // whileHover={{
+            //   scale: 1.04,
+            //   rotate: 1,
+            // }}
             className="hero-main-profile"
           >
             <motion.img
-              animate={{
-                y: [0, -10, 0],
-              }}
+              // animate={{
+              //   y: [0, -10, 0],
+              // }}
               transition={{
                 duration: 4,
                 repeat: Infinity,

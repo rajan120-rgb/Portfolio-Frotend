@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
 * {
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif;
 }
 body {
   color: #f8fafc;
@@ -10,7 +12,6 @@ body {
   position: relative;
   width: 100%;
   overflow-x: hidden;
-   font-family: "Inter", sans-serif;
      /* animation: slideList 0.3s ease forwards ; */
    /* overflow-x: hidden; */
    /* box-sizing: border-box; */

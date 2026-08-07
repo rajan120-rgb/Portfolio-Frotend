@@ -71,6 +71,7 @@ const AddService = () => {
           <div>
             <label htmlFor="title">Title:</label>
             <input
+            className="text-black"
               type="text"
               id="title"
               name="title"
@@ -84,6 +85,7 @@ const AddService = () => {
           <div>
             <label htmlFor="description">Description:</label>
             <input
+            className="text-black"
               type="text"
               id="description"
               name="description"
@@ -107,7 +109,7 @@ const AddService = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit} />
+        <Pop save={"Save"} update={"Do you want to save it?"} handleSubmit={handleSubmit} />
       </div>
     </>
   );

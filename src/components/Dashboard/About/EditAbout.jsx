@@ -18,6 +18,15 @@ const EditAbout = () => {
     profile_image: null,
     resume: null,
   });
+
+  // Current image from database
+  const [currentImage, setCurrentImage] = useState("");
+  const [currentCV, setCurrentCV] = useState("");
+
+  // Preview of newly selected image
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewCV, setPreviewCV] = useState("");
+
   const imgRef = useRef();
   const cvRef = useRef();
 
@@ -29,10 +38,21 @@ const EditAbout = () => {
   };
 
   const handleImage = (e) => {
-    setImage({
-      ...image,
-      [e.target.name]: e.target.files[0],
-    });
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setImage((prev) => ({
+      ...prev,
+      [e.target.name]: file,
+    }));
+
+    if (e.target.name === "profile_image") {
+      setPreviewImage(URL.createObjectURL(file));
+    }
+    if (e.target.name === "resume") {
+      setPreviewCV(URL.createObjectURL(file));
+    }
   };
 
   const save = () => {
@@ -42,7 +62,7 @@ const EditAbout = () => {
   useEffect(() => {
     fetch(`http://localhost:8000/api/admin/about/${id}`, {
       headers: {
-         Accept: "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     })
@@ -54,12 +74,10 @@ const EditAbout = () => {
           profession: data.data.profession,
           description: data.data.description,
         });
-        //  setImage({
-        //    profile_image: data.profile_image,
-        //   resume: data.resume,
-        //  })
+
+        setCurrentImage(data.data.profile_image);
+        setCurrentCV(data.data.resume);
       });
-     
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -113,11 +131,11 @@ const EditAbout = () => {
       // }
       // if (cvRef.current) {
       //   cvRef.current.value = "";
+      navigate("/dashboard/about");
       // }
     } catch (error) {
       console.log(error);
     }
-    navigate("/dashboard/about");
   };
 
   return (
@@ -125,7 +143,52 @@ const EditAbout = () => {
       <div className="create-student student-table">
         <h1>Edit About</h1>
         <form action="" onSubmit={handleSubmit}>
+          {/* current image */}
           <div>
+            <div className="flex ">
+              <div className="my-5">
+                <h3 className="text-black font-bold text-base">
+                  Current Image:
+                </h3>{" "}
+                {currentImage ? (
+                  <img
+                    src={currentImage}
+                    alt="Current"
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      border: "1px solid gray",
+                    }}
+                  />
+                ) : (
+                  <p className="text-black">No Image</p>
+                )}
+              </div>
+
+              {/* Preview */}
+              <div>
+                {previewImage ? (
+                  <>
+                    <h3 className="text-black font-bold text-base">
+                      New Image Preview:
+                    </h3>
+                    <img
+                      src={previewImage}
+                      alt="Preview"
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        objectFit: "cover",
+                        border: "1px solid gray",
+                      }}
+                    />
+                  </>
+                ) : (
+                  <p className="text-black">Select an image to preview.</p>
+                )}
+              </div>
+            </div>
             <label htmlFor="id">Image:</label>
             <input
               className="file"
@@ -154,6 +217,7 @@ const EditAbout = () => {
           <div>
             <label htmlFor="place">Name:</label>
             <input
+              className="text-black"
               type="text"
               name="name"
               value={formData.name || ""}
@@ -164,6 +228,7 @@ const EditAbout = () => {
           <div>
             <label htmlFor="phone">Profession:</label>
             <input
+              className="text-black"
               type="text"
               name="profession"
               value={formData.profession || ""}
@@ -173,13 +238,15 @@ const EditAbout = () => {
           </div>
           <div>
             <label htmlFor="phone">Description:</label>
-            <input
+            <textarea
+              className="text-black min-h-30"
+              id=""
               type="text"
               name="description"
               value={formData.description || ""}
               placeholder="Enter Your Description "
               onChange={handleChange}
-            />
+            ></textarea>
           </div>
 
           <div>
@@ -195,7 +262,11 @@ const EditAbout = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit} />
+        <Pop
+          save={"Update"}
+          update={"Do you want to update it?"}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </>
   );

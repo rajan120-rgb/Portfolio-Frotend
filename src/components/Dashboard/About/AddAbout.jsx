@@ -126,6 +126,7 @@ const AddAbout = () => {
           <div>
             <label htmlFor="image">Image:</label>
             <input
+            className="text-black"
               type="file"
               ref={imgRef}
               name="profile_image"
@@ -140,6 +141,7 @@ const AddAbout = () => {
           <div>
             <label htmlFor="resume">Resume:</label>
             <input
+            className="text-black"
               type="file"
               name="resume"
               ref={cvRef}
@@ -154,6 +156,7 @@ const AddAbout = () => {
           <div>
             <label htmlFor="place">Name:</label>
             <input
+            className="text-black"
               type="text"
               id="place"
               name="name"
@@ -167,6 +170,7 @@ const AddAbout = () => {
           <div>
             <label htmlFor="profession">Profession:</label>
             <input
+            className="text-black"
               type="text"
               id="profession"
               name="profession"
@@ -180,6 +184,7 @@ const AddAbout = () => {
           <div>
             <label htmlFor="phone">Description:</label>
             <input
+            className="text-black"
               type="text"
               name="description"
               value={formData.description }
@@ -205,7 +210,7 @@ const AddAbout = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit}/>
+        <Pop save={"Save"} update={"Do you want to save it?"} handleSubmit={handleSubmit}/>
       </div>
     </>
   );

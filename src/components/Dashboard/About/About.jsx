@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import "./About.css";
 import { Api } from "../../../Api/Api";
@@ -15,9 +14,9 @@ const About = () => {
   });
   const [selectedID, setSelectedID] = useState(null);
 
-   const save = (id) => {
+  const save = (id) => {
     setPopUp(true);
-   setSelectedID(id);
+    setSelectedID(id);
   };
 
   // const deleteData =async (id) =>{
@@ -44,12 +43,12 @@ const About = () => {
     const table = async () => {
       console.log("Token:", token);
       try {
-        const response = await fetch("http://localhost:8000/api/admin/about",{
-           headers: {
-             Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        }
-        })
+        const response = await fetch("http://localhost:8000/api/admin/about", {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const result = await response.json();
         console.log(result);
         console.log(result.data);
@@ -70,27 +69,31 @@ const About = () => {
       <div className="student-table">
         <h1>Portfolio About Table</h1>
         <div className="table-container">
-          <button
-            className="btn btn-add"
-            onClick={() => navigate("/dashboard/addAbout")}
-          >
-            Add New Data
-          </button>
-        <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                {/* <th>SN</th> */}
-                <th>Name</th>
-                <th>Profession</th>
-                {/* <th>Description</th> */}
-                <th>Profile Image</th>
-                <th>Resume</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {aboutTable?.map((item, index) => ( */}
+          {aboutTable ? (
+            ""
+          ) : (
+            <button
+              className="btn btn-add"
+              onClick={() => navigate("/dashboard/addAbout")}
+            >
+              Add New Data
+            </button>
+          )}
+          <div className="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  {/* <th>SN</th> */}
+                  <th>Name</th>
+                  <th>Profession</th>
+                  {/* <th>Description</th> */}
+                  <th>Profile Image</th>
+                  <th>Resume</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* {aboutTable?.map((item, index) => ( */}
                 <tr>
                   {/* <td>{index+1}</td> */}
                   <td>{aboutTable?.name}</td>
@@ -114,28 +117,30 @@ const About = () => {
                   </td>
 
                   <td className="button">
-                    <button
+                    {/* <button
                       className="btn btn-view"
                       onClick={() => navigate(`/dashboard/viewAbout/${aboutTable.id}`)}
                     >
                       View
-                    </button>
+                    </button> */}
 
                     <button
                       className="btn btn-edit"
-                      onClick={() => navigate(`/dashboard/editAbout/${aboutTable.id}`)}
+                      onClick={() =>
+                        navigate(`/dashboard/editAbout/${aboutTable.id}`)
+                      }
                     >
                       Edit
                     </button>
 
-                    <button className="btn btn-dlt"  onClick={()=>save(aboutTable.id)}>Delete</button>
+                    {/* <button className="btn btn-dlt"  onClick={()=>save(aboutTable.id)}>Delete</button> */}
                   </td>
                 </tr>
-              {/* ))} */}
-            </tbody>
-          </table>
-          <Pop handleSubmit={()=>deleteData(selectedID)} />
-        </div>
+                {/* ))} */}
+              </tbody>
+            </table>
+            <Pop handleSubmit={() => deleteData(selectedID)} />
+          </div>
         </div>
       </div>
     </>

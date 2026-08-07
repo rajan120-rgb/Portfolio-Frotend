@@ -6,12 +6,12 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/Context.jsx";
 
-const Navbar = () => {
+const Navbar = ({data}) => {
   const [menu, setMenu] = useState(false);
   const [active, setActive] = useState("");
   const [isOn, setIsOn] = useState(false);
   const { openLogin } = useContext(LoginContext);
-
+  console.log("nav name", data?.name)
   // const toggle = () => {
   //   const newState = !isOn;
   //   setIsOn(newState);
@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar">
-        <h1> │ R │RAJAN</h1>
+        <h1> {data?.name}</h1>
         <div className="navbar-list">
           <li>
             <Link

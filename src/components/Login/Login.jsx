@@ -23,10 +23,10 @@ const Login = () => {
     closeLogin();
     navigate("/");
   };
-const save = (e)=>{
-  e.preventDefault();
-  setPopUp(true);
-}
+// const save = (e)=>{
+//   e.preventDefault();
+//   setPopUp(true);
+// }
   const handleChange = (e) => {
     setLoginForm({
       ...loginForm,
@@ -34,15 +34,15 @@ const save = (e)=>{
     });
   };
 
-  useEffect(()=>{
-    const keyHandler = (e)=>{
-      handleSave(e,popUp,setPopUp,logIn);
-    }
-    document.addEventListener("keydown",keyHandler);
-    return ()=>{
-      document.removeEventListener("keydown",keyHandler)
-    }
-  },[popUp])
+  // useEffect(()=>{
+  //   const keyHandler = (e)=>{
+  //     handleSave(e,popUp,setPopUp,logIn);
+  //   }
+  //   document.addEventListener("keydown",keyHandler);
+  //   return ()=>{
+  //     document.removeEventListener("keydown",keyHandler)
+  //   }
+  // },[popUp])
 
   const logIn = async (e) => {
     e.preventDefault();
@@ -119,7 +119,7 @@ const save = (e)=>{
              onKeyDown={handleEnter}
           />
 
-          <button className="btn-continue" onClick={save}>
+          <button className="btn-continue" onClick={logIn}>
             Continue
           </button>
         </form>
@@ -137,7 +137,7 @@ const save = (e)=>{
           <p>By continuing, I agree to the terms of use and privacy policy.</p>
         </div>
       </div>
-      <Pop handleSubmit={logIn}/>
+      {/* <Pop handleSubmit={logIn}/> */}
     </div>
   );
 };

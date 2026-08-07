@@ -150,7 +150,7 @@ const EditResume = () => {
             </button>
           </div>
         </form>
-        <Pop handleSubmit={handleSubmit} />
+        <Pop save={"Update"} update={"Do you want to update it?"} handleSubmit={handleSubmit} />
       </div>
     </>
   );

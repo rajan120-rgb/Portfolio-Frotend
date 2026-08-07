@@ -8,6 +8,7 @@
   animation: fadeIn 0.3s ease;
 }
 .pop-msg{
+  color: black;
    background: #fff;
   padding: 25px;
   border-radius: 12px;
